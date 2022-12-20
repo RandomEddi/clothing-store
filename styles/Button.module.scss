@@ -1,0 +1,14 @@
+@import './variables.scss';
+
+.button {
+  padding: 15px 35px;
+  color: $mainColor;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  outline: 1px solid #474a51;
+  &:hover {
+    background: $buttonColor;
+    outline: 0;
+  }
+  transition: all .15s ease-in-out;
+}

@@ -1,0 +1,64 @@
+@import './variables.scss';
+
+.cart {
+  &.active {
+    right: 0;
+  }
+  transition: right 0.4s linear;
+  right: -497px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 497px;
+  padding: 30px 40px 40px 30px;
+  background-color: $white;
+  .cartItems {
+    padding: 15px 0 30px 0;
+    border-top: 1px solid $mainColor;
+    border-bottom: 1px solid $mainColor;
+    margin: 30px 0 15px 0;
+  }
+  .cartTotal {
+    display: flex;
+    justify-content: space-between;
+    span {
+      color: $mainColor;
+    }
+  }
+  .cartTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      color: $mainColor;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      line-height: 130%;
+      text-transform: uppercase;
+    }
+    .close {
+      font-size: 12px;
+      line-height: 130%;
+      color: #9f9d9d;
+      font-size: 12px;
+    }
+  }
+  .cartLink {
+    padding: 7px 35px;
+    color: $mainColor;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    outline: 1px solid #474a51;
+    text-align: center;
+    &:hover {
+      background: $buttonColor;
+      outline: 0;
+    }
+    transition: all 0.15s ease-in-out;
+  }
+}

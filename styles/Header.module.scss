@@ -1,0 +1,33 @@
+@import './variables.scss';
+
+.header {
+  border-bottom: 1px solid #eeeeee;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  nav {
+    display: flex;
+    ul {
+      list-style-type: none;
+      display: flex;
+      column-gap: 25px;
+      li {
+        a {
+          font-size: 14px;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+  .secondNav {
+    display: flex;
+    column-gap: 30px;
+    .cartQuantity {
+      margin-left: 3px;
+      font-size: 14px;
+      color: $mainColor;
+    }
+  }
+}
