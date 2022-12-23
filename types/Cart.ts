@@ -1,8 +1,8 @@
-import { ICartItem } from "./ICartItem"
+import { ICartItem } from './CartItem'
 
 export interface ICart {
   cartIsOpen: boolean
-  items: ICartItem[]
+  items: Required<ICartItem>[]
   quantity: number
-  total: number
+  totalAmount: number
 }

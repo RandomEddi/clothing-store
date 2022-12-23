@@ -1,0 +1,71 @@
+@import './variables.scss';
+
+.catalogItem {
+  .itemImage {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    z-index: 99;
+    .itemPhoto {
+      position: absolute;
+      inset: 0;
+    }
+    .itemManagement {
+      position: absolute;
+      inset: 0;
+      z-index: 100;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .itemToFavourite {
+        display: flex;
+        height: 18px;
+        justify-content: flex-end;
+        button {
+          margin-top: 10px;
+          margin-right: 20px;
+        }
+      }
+      .itemToCart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        background-color: rgba(221, 232, 246, 0.4);
+        .itemSizes {
+          display: flex;
+          column-gap: 10px;
+          margin-top: 11px;
+          .itemSize {
+            color: $mainColor;
+            padding: 1px 2px;
+          }
+          .itemSize.activeSize {
+            background-color: $mainColor;
+            color: $white;
+          }
+        }
+        & > button {
+          margin: 5px 0 12px 0;
+          color: $mainColor;
+          text-align: center;
+        }
+      }
+      opacity: 0;
+      transition: opacity 0.4s;
+      &.itemIsHovered {
+        opacity: 1;
+      }
+    }
+  }
+  .itemTitle {
+    margin: 20px 0 5px 0;
+    font-size: 24px;
+  }
+  .itemTitle,
+  .itemPrice {
+    text-align: center;
+    color: $mainColor;
+  }
+}

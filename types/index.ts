@@ -1,2 +1,5 @@
 export type { ICart } from './Cart'
-export type { ICartItem } from './ICartItem'
+export type { ICartItem } from './CartItem'
+export type { ICatalogItem } from './CatalogItem'
+export type { IItem } from './Item'
+export type { IHeaderLink } from './HeaderLink'

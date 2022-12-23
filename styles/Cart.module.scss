@@ -6,7 +6,7 @@
   }
   transition: right 0.4s linear;
   right: -497px;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   z-index: 999;
@@ -15,17 +15,29 @@
   flex-direction: column;
 
   width: 497px;
-  padding: 30px 40px 40px 30px;
+  padding: 115px 40px 40px 30px;
   background-color: $white;
   .cartItems {
-    padding: 15px 0 30px 0;
+    padding: 15px 20px 30px 0;
     border-top: 1px solid $mainColor;
     border-bottom: 1px solid $mainColor;
     margin: 30px 0 15px 0;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #EEEEEE;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #9F9D9D;
+      border-radius: 10px;
+    }
   }
   .cartTotal {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
     span {
       color: $mainColor;
     }

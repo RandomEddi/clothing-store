@@ -1,0 +1,22 @@
+@import './variables.scss';
+.headerWrapper {
+  position: relative;
+  z-index: 1000;
+  .headerList {
+    opacity: 1;
+    transition: opacity 0.4s;
+    position: absolute;
+    left: -10px;
+    padding: 30px;
+    background-color: $white;
+    ul {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      a {
+        color: $mainColor;
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -7,8 +7,9 @@
   text-transform: uppercase;
   outline: 1px solid #474a51;
   &:hover {
-    background: $buttonColor;
+    background: $buttonColor!important;
     outline: 0;
+    color: $mainColor!important;
   }
   transition: all .15s ease-in-out;
 }
