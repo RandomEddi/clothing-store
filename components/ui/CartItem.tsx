@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import Image from 'next/image'
 import { ICartItem } from 'types'
-import styles from 'styles/CartItem.module.scss'
+import { CartItemStyles as styles } from 'styles/ui'
 import { useAppDispatch } from 'hooks'
 import { cartActions } from 'store//slices/cartSlice'
 
@@ -46,7 +46,8 @@ export const CartItem: FC<ICartItem> = React.memo((props) => {
               Цвет:&nbsp;<span>{color}</span>
             </p>
             <div className={styles.itemQuantity}>
-              Количество:&nbsp;<button onClick={onDecreaseItemHandler}>&#8722;</button>
+              Количество:&nbsp;
+              <button onClick={onDecreaseItemHandler}>&#8722;</button>
               {quantity}
               <button onClick={onIncreaseItemHandler}>&#43;</button>
             </div>

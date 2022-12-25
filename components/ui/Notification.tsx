@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { notificationActions } from 'store//slices/notificationSlice'
-import styles from 'styles/Notification.module.scss'
+import { NotificationStyles as styles } from 'styles/ui'
 
 interface Props {
   text: string

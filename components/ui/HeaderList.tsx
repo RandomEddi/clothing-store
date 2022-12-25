@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import React, { FC, useState } from 'react'
-import styles from 'styles/HeaderList.module.scss'
-import { IHeaderLink } from 'types'
+import { HeaderListStyles as styles } from 'styles/ui'
+import { ILink } from 'types'
 
 interface Props {
-  links: IHeaderLink[]
+  links: ILink[]
   children: React.ReactNode
 }
 

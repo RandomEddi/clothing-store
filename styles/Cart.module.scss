@@ -17,6 +17,12 @@
   width: 497px;
   padding: 115px 40px 40px 30px;
   background-color: $white;
+  .emptyCart {
+    text-align: center;
+    color: $mainColor;
+    font-size: 25px;
+    margin: 50px 0;
+  }
   .cartItems {
     padding: 15px 20px 30px 0;
     border-top: 1px solid $mainColor;
@@ -27,10 +33,10 @@
       width: 5px;
     }
     &::-webkit-scrollbar-track {
-      background-color: #EEEEEE;
+      background-color: #eeeeee;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: #9F9D9D;
+      background-color: #9f9d9d;
       border-radius: 10px;
     }
   }
@@ -38,6 +44,10 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    font-size: $fontSizeMedium;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeMedium-laptop;
+    }
     span {
       color: $mainColor;
     }
@@ -46,15 +56,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    span {
+    & > span {
       color: $mainColor;
-      font-size: 14px;
+      font-size: $fontSizeLittle;
+      @media (max-width: $laptopWidth) {
+        font-size: $fontSizeLittle-laptop;
+      }
       letter-spacing: 0.02em;
       line-height: 130%;
       text-transform: uppercase;
     }
     .close {
-      font-size: 12px;
+      font-size: $fontSizeSmall;
+      @media (max-width: $laptopWidth) {
+        font-size: $fontSizeSmall-laptop;
+      }
       line-height: 130%;
       color: #9f9d9d;
       font-size: 12px;
@@ -67,6 +83,10 @@
     text-transform: uppercase;
     outline: 1px solid #474a51;
     text-align: center;
+    font-size: $fontSizeMedium;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeMedium-laptop;
+    }
     &:hover {
       background: $buttonColor;
       outline: 0;

@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import '../variables.scss';
 
 .catalogItem {
   .itemImage {
@@ -40,6 +40,10 @@
           .itemSize {
             color: $mainColor;
             padding: 1px 2px;
+            font-size: $fontSizeMedium;
+            @media (max-width: $laptopWidth) {
+              font-size: $fontSizeMedium-laptop;
+            }
           }
           .itemSize.activeSize {
             background-color: $mainColor;
@@ -50,6 +54,10 @@
           margin: 5px 0 12px 0;
           color: $mainColor;
           text-align: center;
+          font-size: $fontSizeMedium;
+          @media (max-width: $laptopWidth) {
+            font-size: $fontSizeMedium-laptop;
+          }
         }
       }
       opacity: 0;
@@ -61,7 +69,19 @@
   }
   .itemTitle {
     margin: 20px 0 5px 0;
-    font-size: 24px;
+    font-size: $fontSizeBig;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeBig-laptop;
+    }
+  }
+  .itemPrice {
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+    font-size: $fontSizeMedium;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeMedium-laptop;
+    }
   }
   .itemTitle,
   .itemPrice {

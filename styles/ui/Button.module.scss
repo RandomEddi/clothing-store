@@ -1,0 +1,20 @@
+@import '../variables.scss';
+
+.button {
+  padding: 15px 35px;
+  color: $mainColor;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  outline: 1px solid #474a51;
+  border-radius: 3px;
+  font-size: $fontSizeMedium;
+  @media (max-width: $laptopWidth) {
+    font-size: $fontSizeMedium-laptop;
+  }
+  &:hover {
+    background: $buttonColor !important;
+    outline: 0;
+    color: $mainColor !important;
+  }
+  transition: all 0.15s ease-in-out;
+}

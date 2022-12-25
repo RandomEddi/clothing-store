@@ -1,0 +1,27 @@
+@import '../variables.scss';
+
+.notFound {
+  margin-top: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  h4 {
+    font-weight: normal;
+    font-size: $fontSizeLg;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeLg-laptop;      
+    }
+    margin-bottom: 80px;
+  }
+  p {
+    margin-bottom: 20px;
+    font-size: $fontSizeBig;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeBig-laptop;      
+    }
+  }
+  a {
+    margin-top: 50px;
+  }
+}

@@ -1,11 +1,13 @@
-import React, { FC } from 'react'
-import styles from 'styles/Header.module.scss'
+import React, { FC, useState, ChangeEvent, MouseEvent, useEffect } from 'react'
+import { HeaderStyles as styles } from 'styles'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { cartActions } from 'store//slices/cartSlice'
 import { HeaderList } from 'components/ui'
-import { IHeaderLink } from 'types'
-const catalogLinks: IHeaderLink[] = [
+import { ILink } from 'types'
+import { useRouter } from 'next/router'
+
+const catalogLinks: ILink[] = [
   { name: 'Платья', url: '/catalog/dresses' },
   { name: 'Юбки', url: '/catalog/skirts' },
   { name: 'Блузки', url: '/catalog/blouses' },
@@ -18,19 +20,47 @@ const catalogLinks: IHeaderLink[] = [
   { name: 'Спортивные костюмы', url: '/catalog/tracksuits' },
   { name: 'Пальто, плащи, куртки', url: '/catalog/jackets' }
 ]
-const infoLinks: IHeaderLink[] = [
+const infoLinks: ILink[] = [
   { name: 'Контакты', url: '/info/contacts' },
   { name: 'Таблица размеров', url: '/info/sizes' },
-  { name: 'Доставка и оплата', url: '/info/delivery ' },
+  { name: 'Доставка и оплата', url: '/info/delivery' },
   { name: 'Возврат', url: '/info/refund' }
 ]
 
 export const Header: FC = () => {
+  const router = useRouter()
   const dispatch = useAppDispatch()
+  const [searchIsActive, setSearchIsActive] = useState<boolean>(false)
+  const cartQuantity = useAppSelector((state) => state.cartReducer.quantity)
+  const [searchValue, setSearchValue] = useState<string>('')
+
   const toggleCartHandler = () => {
     dispatch(cartActions.toggleCart())
   }
-  const cartQuantity = useAppSelector((state) => state.cartReducer.quantity)
+
+  const onOpenSearchHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    setSearchIsActive((prev) => !prev)
+  }
+
+  const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value)
+  }
+
+  useEffect(() => {
+    const keyDownHandler = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        router.push(`/search?query=${searchValue}`)
+      }
+    }
+
+    if (searchIsActive) {
+      document.addEventListener('keydown', keyDownHandler)
+    }
+
+    return () => document.removeEventListener('keydown', keyDownHandler)
+  }, [searchIsActive, searchValue])
+
   return (
     <header className={`${styles.header} container`}>
       <nav>
@@ -57,9 +87,24 @@ export const Header: FC = () => {
         <img src='/logo.svg' alt='logotip' />
       </Link>
       <div className={styles.secondNav}>
-        <button>
-          <img src={'/search.svg'} alt='search' />
-        </button>
+        <div className={styles.headerSearch}>
+          <input
+            placeholder='Поиск'
+            value={searchValue}
+            className={`${styles.searchInput}${
+              searchIsActive ? ` ${styles.active}` : ''
+            }`}
+            onChange={onChangeSearchInput}
+            type='text'
+          />
+          <button tabIndex={-2} onClick={onOpenSearchHandler}>
+            {searchIsActive ? (
+              <img src={'/close.svg'} alt='search' />
+            ) : (
+              <img src={'/search.svg'} alt='search' />
+            )}
+          </button>
+        </div>
         <Link href={'/profile'}>
           <img src={'/profile.svg'} alt='profile' />
         </Link>

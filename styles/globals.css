@@ -1,5 +1,4 @@
 @import url('https://fonts.cdnfonts.com/css/futura-pt');
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -54,6 +53,6 @@ main {
 
 @media (min-width: 1400px) {
   .container {
-    padding: 0 calc(50% - 700px);
+    padding: 0 calc(50% - 680px);
   }
 }

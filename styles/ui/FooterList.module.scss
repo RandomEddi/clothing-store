@@ -1,0 +1,31 @@
+@import '../variables.scss';
+
+.footerList {
+  display: flex;
+  flex-direction: column;
+  ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    list-style-type: none;
+  }
+  .mainLink {
+    margin-bottom: 20px;
+    color: $mainColor;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: $fontSizeBig;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeBig-laptop;
+    }
+  }
+  .secondaryLink {
+    a {
+      font-size: 18px;
+      color: $mainColor;
+      @media (max-width: $laptopWidth) {
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@import '../variables.scss';
+
+.seachResult {
+  margin-bottom: 50px;
+  .resultItems {
+    & > p {
+      font-size: $fontSizeBig;
+      @media (max-width: $laptopWidth) {
+        font-size: $fontSizeBig-laptop;
+      }
+      margin: 80px 0;
+      letter-spacing: 0.02em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    & > div {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 80px;
+    }
+  }
+  .itemsEmpty {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+    p {
+      font-size: $fontSizeBig;
+      @media (max-width: $laptopWidth) {
+        font-size: $fontSizeBig-laptop;
+      }
+      margin-bottom: 50px;
+      letter-spacing: 0.02em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+}

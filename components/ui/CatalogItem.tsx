@@ -1,15 +1,15 @@
 import React, { FC, useState } from 'react'
 import Image from 'next/image'
-import { ICatalogItem } from 'types'
-import styles from 'styles/CatalogItem.module.scss'
-import { useAppDispatch } from 'hooks/useAppDispatch'
+import { IItem } from 'types'
+import { CatalogItemStyles as styles } from 'styles/ui'
+import { useAppDispatch } from 'hooks'
 import { cartActions } from 'store//slices/cartSlice'
 
-export const CatalogItem: FC<ICatalogItem> = React.memo((props) => {
-  const dispatch = useAppDispatch()
-  const { img, price, sizes, title, articul, id } = props
+export const CatalogItem: FC<IItem> = React.memo((props) => {
+  const { img, price, color, sizes, title, articul, id, priceWithDiscount } = props
   const [selectedSize, setSelectedSize] = useState<number | null>(null)
   const [itemIsFocused, setItemIsFocused] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
   
   const chooseSizeHandler = (size: number) => {
     if (size === selectedSize) {
@@ -32,7 +32,7 @@ export const CatalogItem: FC<ICatalogItem> = React.memo((props) => {
       dispatch(
         cartActions.addToCart({
           articul,
-          color: '',
+          color: color,
           id,
           img,
           price,
@@ -89,7 +89,19 @@ export const CatalogItem: FC<ICatalogItem> = React.memo((props) => {
         <p>{title}</p>
       </div>
       <div className={styles.itemPrice}>
-        <p>
+        {priceWithDiscount ? (
+          <p>
+            {priceWithDiscount}
+            <span> &#8381;</span>
+          </p>
+        ) : (
+          ''
+        )}
+        <p
+          style={{
+            textDecoration: `${priceWithDiscount ? 'line-through' : 'none'}`
+          }}
+        >
           {price}
           <span> &#8381;</span>
         </p>

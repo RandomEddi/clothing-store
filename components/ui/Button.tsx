@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import styles from 'styles/Button.module.scss'
+import { ButtonStyles as styles } from 'styles/ui'
 
 interface Props {
-  children: string
+  children: React.ReactNode
   clickHandler?: () => unknown
   classes?: string
 }

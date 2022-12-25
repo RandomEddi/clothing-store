@@ -1,95 +1,21 @@
 import Head from 'next/head'
 import { Button } from 'components/ui'
-import styles from 'styles/Main.module.scss'
-import { ICatalogItem } from 'types'
-import { CatalogItem } from 'components/CatalogItem/CatalogItem'
-import { useWindowSize } from 'hooks'
-
-const DUMMY_CATALOGITEMS: ICatalogItem[] = [
-  {
-    id: 1,
-    img: '/catalog-item-1.png',
-    price: 5000,
-    sizes: [40, 42, 44, 46, 48],
-    title: 'Бомбер',
-    articul: 134
-  },
-  {
-    id: 2,
-    img: '/catalog-item-2.png',
-    price: 4000,
-    sizes: [40, 42, 44, 46, 48],
-    title: 'Кожаная куртка',
-    articul: 134
-  },
-  {
-    id: 3,
-    img: '/catalog-item-3.png',
-    price: 12000,
-    sizes: [40, 42, 44, 46, 48],
-    title: 'Тренч',
-    articul: 134
-  },
-  {
-    id: 4,
-    img: '/catalog-item-4.png',
-    price: 5000,
-    sizes: [40, 42, 44, 46, 48],
-    title: 'Рубашка',
-    priceWithDiscount: 4500,
-    articul: 134
-  },
-  {
-    id: 5,
-    img: '/catalog-item-5.png',
-    price: 8000,
-    sizes: [40, 42, 44, 46, 48],
-    title: 'Платье',
-    articul: 134
-  },
-  {
-    id: 6,
-    img: '/catalog-item-6.png',
-    price: 5000,
-    sizes: [40, 42, 44, 46, 48],
-    title: 'Домашний комплект',
-    priceWithDiscount: 4500,
-    articul: 134
-  },
-  {
-    id: 7,
-    img: '/catalog-item-7.png',
-    price: 3000,
-    sizes: [40, 42, 44, 46, 48],
-    title: 'Базовая водолазка',
-    articul: 134
-  },
-  {
-    id: 8,
-    img: '/catalog-item-8.png',
-    price: 12000,
-    sizes: [40, 42, 44, 46, 48],
-    title: 'Базовая футболка',
-    articul: 134
-  },
-  {
-    id: 9,
-    img: '/catalog-item-9.png',
-    price: 5000,
-    sizes: [40, 42, 44, 46, 48],
-    title: 'Классические брюки',
-    articul: 134
-  }
-]
+import { MainPageStyles as styles } from 'styles/pages'
+import { CatalogItem } from 'components'
+import { useAppSelector, useWindowSize } from 'hooks'
+import { useState } from 'react'
+import Link from 'next/link'
 
 export default function Home() {
+  const [isCatalogFull, setIsCatalogFull] = useState<boolean>(false)
+  const catalogItems = useAppSelector((state) => state.items.items)
   const { width } = useWindowSize()
   const styleToItems = width
     ? {
         justifyContent: width <= 991 ? 'center' : ''
       }
     : {}
-  console.log('asd')
+  const endOfArray = isCatalogFull ? catalogItems.length : 6
   return (
     <>
       <Head>
@@ -120,7 +46,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <section>
+      <section className={styles.catalog}>
         <div className={styles.sectionTitle}>
           <h5>КАТАЛОГ</h5>
         </div>
@@ -128,7 +54,7 @@ export default function Home() {
           className={`container ${styles.catalogItems}`}
           style={styleToItems}
         >
-          {DUMMY_CATALOGITEMS.map((catalItem) => (
+          {catalogItems.slice(0, endOfArray).map((catalItem) => (
             <CatalogItem
               key={catalItem.id}
               id={catalItem.id}
@@ -137,10 +63,86 @@ export default function Home() {
               price={catalItem.price}
               sizes={catalItem.sizes}
               title={catalItem.title}
+              color={catalItem.color}
+              priceWithDiscount={catalItem.priceWithDiscount}
             />
           ))}
         </div>
+        {!isCatalogFull && (
+          <div className={styles.catalogBtn}>
+            <Button
+              clickHandler={() => {
+                setIsCatalogFull(true)
+              }}
+            >
+              посмотреть все
+            </Button>
+          </div>
+        )}
       </section>
+      <div className='container'>
+        <div className={styles.lookbook}>
+          <img src='/lookbook-mainPage.png' alt='woman' />
+          <div className={styles.lbInfo}>
+            <div>
+              <h6>LOOKBOOK</h6>
+              <p>
+                При создании коллекций мы учитываем, чтобы все изделия
+                сочетались. Это позволяет подобрать полный образ на все случаи
+                жизни
+              </p>
+              <p>Скидка 10% при покупке полного образа</p>
+              <Link href={'/lookbook'}>
+                <Button>Смотреть</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='container'>
+        <div className={styles.ourInst}>
+          <p>НАШ ИНСТАГРАМ</p>
+          <h4>@loylen_brand</h4>
+          <div className={styles.instPhotos}>
+            <div className={styles.instPhoto}>
+              <img src='/mainPage-inst1.png' alt='photo' />
+              <a
+                href='https://www.instagram.com/LOYLEN_BRAND'
+                className={styles.toInst}
+              >
+                ПЕРЕЙТИ В ИНСТАГРАМ
+              </a>
+            </div>
+            <div className={styles.instPhoto}>
+              <img src='/mainPage-inst2.png' alt='photo' />
+              <a
+                href='https://www.instagram.com/LOYLEN_BRAND'
+                className={styles.toInst}
+              >
+                ПЕРЕЙТИ В ИНСТАГРАМ
+              </a>
+            </div>
+            <div className={styles.instPhoto}>
+              <img src='/mainPage-inst3.png' alt='photo' />
+              <a
+                href='https://www.instagram.com/LOYLEN_BRAND'
+                className={styles.toInst}
+              >
+                ПЕРЕЙТИ В ИНСТАГРАМ
+              </a>
+            </div>
+            <div className={styles.instPhoto}>
+              <img src='/mainPage-inst4.png' alt='photo' />
+              <a
+                href='https://www.instagram.com/LOYLEN_BRAND'
+                className={styles.toInst}
+              >
+                ПЕРЕЙТИ В ИНСТАГРАМ
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

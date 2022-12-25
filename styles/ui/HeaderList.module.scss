@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import '../variables.scss';
 .headerWrapper {
   position: relative;
   z-index: 1000;
@@ -15,7 +15,10 @@
       row-gap: 10px;
       a {
         color: $mainColor;
-        font-size: 14px;
+        font-size: 18px;
+        @media (max-width: $laptopWidth) {
+          font-size: 14px;
+        }
       }
     }
   }

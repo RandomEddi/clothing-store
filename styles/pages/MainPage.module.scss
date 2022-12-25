@@ -1,0 +1,200 @@
+@import '../variables.scss';
+.mainHeader {
+  margin-bottom: 160px;
+  .bigHeader {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 960px;
+    @media (max-width: $laptopWidth) {
+      height: 700px;
+    }
+    img {
+      height: 960px;
+      position: absolute;
+      top: 0;
+      @media (max-width: $laptopWidth) {
+        height: 700px;
+      }
+      width: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    & > div {
+      text-align: center;
+      text-transform: uppercase;
+      z-index: 100;
+      margin-bottom: 141px;
+      p {
+        margin-bottom: 30px;
+
+        color: #ffffff;
+        font-size: $fontSizeLg;
+        @media (max-width: $laptopWidth) {
+          font-size: $fontSizeLg-laptop;
+        }
+      }
+    }
+  }
+  .mdHeaders {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    .mdHeader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+      height: 800px;
+      @media (max-width: $laptopWidth) {
+        height: 600px;
+      }
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position-y: -10px;
+      background-position-x: center;
+      div {
+        z-index: 100;
+        text-align: center;
+        p {
+          font-size: $fontSizeBig;
+          @media (max-width: $laptopWidth) {
+            font-size: $fontSizeBig-laptop;
+          }
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+          margin-bottom: 30px;
+        }
+        * {
+          color: $white;
+        }
+      }
+      &:nth-child(1) {
+        background-image: url(/main-header-2.png);
+      }
+      &:nth-child(2) {
+        background-image: url(/main-header-3.png);
+      }
+    }
+  }
+}
+.catalog {
+  .sectionTitle {
+    margin-bottom: 80px;
+    h5 {
+      color: $mainColor;
+      text-align: center;
+      letter-spacing: 0.02em;
+      font-weight: normal;
+      font-size: $fontSizeBig;
+      @media (max-width: $laptopWidth) {
+        font-size: $fontSizeBig-laptop;
+      }
+    }
+  }
+
+  .catalogItems {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 80px;
+  }
+
+  .catalogBtn {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.lookbook {
+  margin-top: 160px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #eeeeee;
+  img {
+    width: 100%;
+  }
+  .lbInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h6 {
+      color: $mainColor;
+      font-weight: normal;
+      font-size: $fontSizeLg;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      @media (max-width: $laptopWidth) {
+        font-size: $fontSizeLg-laptop;
+      }
+    }
+    p {
+      margin-bottom: 10px;
+      color: $mainColor;
+      font-size: fontSizeMedium;
+      @media (max-width: $laptopWidth) {
+        font-size: fontSizeMedium-laptop;
+      }
+      max-width: 407px;
+    }
+    button {
+      margin-top: 50px;
+    }
+  }
+}
+
+.ourInst {
+  margin-top: 160px;
+  color: $mainColor;
+  & > p {
+    font-size: $fontSizeBig;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeBig-laptop;
+    }
+  }
+  & > h4 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: $fontSizeLg;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeLg-laptop;
+    }
+  }
+  .instPhotos {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    .instPhoto {
+      overflow: hidden;
+      position: relative;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      .toInst {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background-color: rgb(221, 232, 246, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.3s ease;
+        font-size: fontSizeMedium;
+        text-align: center;
+        @media (max-width: $laptopWidth) {
+          font-size: fontSizeMedium-laptop;
+        }
+      }
+      &:hover .toInst {
+        opacity: 1;
+      }
+    }
+  }
+}

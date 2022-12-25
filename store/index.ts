@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { notificationSlice, cartSlice } from './slices'
+import { notificationSlice, cartSlice, itemsSlice } from './slices'
 
 export const store = configureStore({
   reducer: {
     notificationReducer: notificationSlice.reducer,
-    cartReducer: cartSlice.reducer
+    cartReducer: cartSlice.reducer,
+    items: itemsSlice.reducer
   }
 })
 
