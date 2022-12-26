@@ -18,11 +18,6 @@ export default function Home() {
   const endOfArray = isCatalogFull ? catalogItems.length : 6
   return (
     <>
-      <Head>
-        <title>LOYLEN</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
       <div className={styles.mainHeader}>
         <div className={styles.bigHeader}>
           <img src='/main-header-1.png' alt='woman' />

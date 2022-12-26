@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { useAppDispatch, useAppSelector } from 'hooks'
-import { notificationActions } from 'store//slices/notificationSlice'
+import { notificationActions } from 'store//slices'
+import { useAppDispatch, useAppSelector, useWindowSize } from 'hooks'
 import { NotificationStyles as styles } from 'styles/ui'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export const Notification: FC<Props> = React.memo((props) => {
   const { text } = props
   const dispatch = useAppDispatch()
-
+  const { width } = useWindowSize()
   const notificationIsOpen = useAppSelector(
     (state) => state.notificationReducer.isOpen
   )
@@ -21,7 +21,7 @@ export const Notification: FC<Props> = React.memo((props) => {
 
   return (
     <>
-      {notificationIsOpen && (
+      {width && width > 768 && notificationIsOpen && (
         <div className={styles.notification}>
           <p>{text}</p>
           <span onClick={onCloseNotification}>

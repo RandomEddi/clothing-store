@@ -1,9 +1,9 @@
-import Link from 'next/link'
 import React, { FC } from 'react'
-import { CartStyles as styles } from 'styles'
+import Link from 'next/link'
+import { cartActions } from 'store//slices'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import { cartActions } from 'store//slices/cartSlice'
-import { CartItem } from './ui/CartItem'
+import { CartItem } from './ui'
+import { CartStyles as styles } from 'styles'
 
 export const Cart: FC = () => {
   const dispatch = useAppDispatch()
@@ -45,13 +45,17 @@ export const Cart: FC = () => {
             <span>Всего за товары:</span>
             <span>{cartCtx.totalAmount} &#8381;</span>
           </p>
-          <Link className={styles.cartLink} href={'/cart'}>
-            перейти в корзину
-          </Link>
         </>
       ) : (
         <div className={styles.emptyCart}>Корзина пуста</div>
       )}
+      <Link
+        onClick={() => dispatch(cartActions.closeCart())}
+        className={styles.cartLink}
+        href={'/cart'}
+      >
+        перейти в корзину
+      </Link>
     </div>
   )
 }

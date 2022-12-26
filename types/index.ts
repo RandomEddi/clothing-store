@@ -1,4 +1,5 @@
 export type { ICart } from './Cart'
+export type { IFavourite } from './Favourite'
 export type { ICartItem } from './CartItem'
 export type { IItem } from './Item'
 export type { ILink } from './Link'

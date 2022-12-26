@@ -20,6 +20,9 @@ export const cartSlice = createSlice({
     toggleCart(state) {
       state.cartIsOpen = !state.cartIsOpen
     },
+    closeCart(state) {
+      state.cartIsOpen = false      
+    },
     addToCart(state, action: PayloadAction<ICartItem>) {
       const payloadItem = action.payload
       const itemInCart = state.items.find(

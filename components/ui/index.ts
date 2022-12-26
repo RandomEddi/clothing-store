@@ -1,4 +1,6 @@
 export { Button } from './Button'
-export { Notification } from './Notification'
-export { HeaderList } from './HeaderList'
+export { CartItem } from './CartItem'
+export { CatalogItem } from './CatalogItem'
 export { FooterList } from './FooterList'
+export { HeaderList } from './HeaderList'
+export { Notification } from './Notification'

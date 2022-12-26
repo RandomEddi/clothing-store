@@ -1,0 +1,52 @@
+@import '../variables.scss';
+
+.favouritesPage {
+  margin-top: 30px;
+  .path {
+    color: $mainColor;
+    font-size: $fontSizeMedium;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeMedium-laptop;
+    }
+    .delimiter {
+      margin: 0 3px;
+    }
+    .big {
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+  }
+  .favouriteTitle {
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: $fontSizeBig;
+    font-weight: normal;
+    margin-top: 50px;
+    @media (max-width: $laptopWidth) {
+      font-size: $fontSizeBig-laptop;
+    }
+  }
+  .favouritesItems {
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  .favoruitesEmpty {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    p {
+      margin-bottom: 30px;
+      color: #9f9d9d;
+      font-size: $fontSizeMedium;
+      @media (max-width: $laptopWidth) {
+        font-size: $fontSizeMedium-laptop;
+      }
+    }
+  }
+}

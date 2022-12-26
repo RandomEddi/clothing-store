@@ -2,7 +2,7 @@ import React, { FC, useState, ChangeEvent, MouseEvent, useEffect } from 'react'
 import { HeaderStyles as styles } from 'styles'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import { cartActions } from 'store//slices/cartSlice'
+import { cartActions, favouritesActions } from 'store//slices'
 import { HeaderList } from 'components/ui'
 import { ILink } from 'types'
 import { useRouter } from 'next/router'
@@ -35,7 +35,13 @@ export const Header: FC = () => {
   const [searchValue, setSearchValue] = useState<string>('')
 
   const toggleCartHandler = () => {
+    dispatch(favouritesActions.closeFavourites())
     dispatch(cartActions.toggleCart())
+  }
+
+  const toggleFavouritesHandler = () => {
+    dispatch(cartActions.closeCart())
+    dispatch(favouritesActions.toggleFavourites())
   }
 
   const onOpenSearchHandler = (e: MouseEvent<HTMLButtonElement>) => {
@@ -97,7 +103,7 @@ export const Header: FC = () => {
             onChange={onChangeSearchInput}
             type='text'
           />
-          <button tabIndex={-2} onClick={onOpenSearchHandler}>
+          <button onClick={onOpenSearchHandler}>
             {searchIsActive ? (
               <img src={'/close.svg'} alt='search' />
             ) : (
@@ -108,9 +114,9 @@ export const Header: FC = () => {
         <Link href={'/profile'}>
           <img src={'/profile.svg'} alt='profile' />
         </Link>
-        <Link href={'/favourites'}>
+        <button onClick={toggleFavouritesHandler}>
           <img src={'/favourites.svg'} alt='favourites' />
-        </Link>
+        </button>
         <button onClick={toggleCartHandler}>
           <img src={'/cart.svg'} alt='cart' />
           <span className={styles.cartQuantity}>{cartQuantity}</span>

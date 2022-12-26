@@ -1,9 +1,11 @@
 import MainPageStyles from './MainPage.module.scss'
 export { MainPageStyles }
 
-import SearchPage from './SearchPage.module.scss'
-export { SearchPage }
+import SearchPageStyles from './SearchPage.module.scss'
+export { SearchPageStyles }
 
-import NotFoundPage from './404Page.module.scss'
-export { NotFoundPage }
+import FavouritesPageStyles from './FavouritesPage.module.scss'
+export { FavouritesPageStyles }
 
+import NotFoundPageStyles from './404Page.module.scss'
+export { NotFoundPageStyles }

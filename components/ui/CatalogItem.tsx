@@ -1,16 +1,19 @@
 import React, { FC, useState } from 'react'
 import Image from 'next/image'
-import { IItem } from 'types'
+import { cartActions, favouritesActions } from 'store//slices'
+import { useAppDispatch, useAppSelector } from 'hooks'
 import { CatalogItemStyles as styles } from 'styles/ui'
-import { useAppDispatch } from 'hooks'
-import { cartActions } from 'store//slices/cartSlice'
+import { IItem } from 'types'
 
 export const CatalogItem: FC<IItem> = React.memo((props) => {
-  const { img, price, color, sizes, title, articul, id, priceWithDiscount } = props
+  const { img, price, color, sizes, title, articul, id, priceWithDiscount } =
+    props
+  const dispatch = useAppDispatch()
   const [selectedSize, setSelectedSize] = useState<number | null>(null)
   const [itemIsFocused, setItemIsFocused] = useState<boolean>(false)
-  const dispatch = useAppDispatch()
-  
+  const favouritesItems = useAppSelector((state) => state.favourites.items)
+  const isFavouriteActive = !!favouritesItems.find((i) => i.id === id)
+
   const chooseSizeHandler = (size: number) => {
     if (size === selectedSize) {
       setSelectedSize(null)
@@ -32,7 +35,7 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
       dispatch(
         cartActions.addToCart({
           articul,
-          color: color,
+          color,
           id,
           img,
           price,
@@ -40,6 +43,24 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
           title
         })
       )
+    }
+  }
+
+  const addToFavouriteHandler = () => {
+    if (!isFavouriteActive) {
+      dispatch(
+        favouritesActions.addToFavourites({
+          title,
+          articul,
+          color,
+          id,
+          img,
+          price,
+          sizes
+        })
+      )
+    } else {
+      dispatch(favouritesActions.deleteFromFavourites({ id }))
     }
   }
 
@@ -63,8 +84,12 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
           }`}
         >
           <div className={styles.itemToFavourite}>
-            <button>
-              <img src='/heart.svg' alt='heart svg' />
+            <button onClick={addToFavouriteHandler}>
+              {isFavouriteActive ? (
+                <Image height={20} width={18} src='/favourite-active.svg' alt='favourite svg' />
+              ) : (
+                <Image height={20} width={18} src='/favourite.svg' alt='favourite svg' />
+              )}
             </button>
           </div>
           <div className={styles.itemToCart}>

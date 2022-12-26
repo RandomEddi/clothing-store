@@ -1,6 +1,6 @@
 @import './variables.scss';
 
-.cart {
+.favourites {
   &.active {
     right: 0;
   }
@@ -8,7 +8,7 @@
   right: -497px;
   top: 0;
   bottom: 0;
-  z-index: 999;
+  z-index: 998;
 
   display: flex;
   flex-direction: column;
@@ -17,18 +17,20 @@
   padding: 115px 40px 40px 30px;
   background-color: $white;
   transition: right 0.4s linear;
-  .emptyCart {
+  .emptyFavourites {
     text-align: center;
     color: $mainColor;
     font-size: 25px;
     margin: 50px 0;
   }
-  .cartItems {
-    padding: 15px 20px 30px 0;
-    border-top: 1px solid $mainColor;
-    border-bottom: 1px solid $mainColor;
-    margin: 30px 0 15px 0;
+  .favouritesList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 30px 0 16px 0;
     overflow-y: auto;
+    overflow-x: hidden;
+    justify-items: center;
     &::-webkit-scrollbar {
       width: 5px;
     }
@@ -40,31 +42,19 @@
       border-radius: 10px;
     }
   }
-  .cartTotal {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    font-size: $fontSizeMedium;
-    @media (max-width: $laptopWidth) {
-      font-size: $fontSizeMedium-laptop;
-    }
-    span {
-      color: $mainColor;
-    }
-  }
-  .cartTop {
+  .favouritesTop {
     display: flex;
     justify-content: space-between;
     align-items: center;
     & > span {
       color: $mainColor;
       font-size: $fontSizeLittle;
-      letter-spacing: 0.02em;
-      line-height: 130%;
-      text-transform: uppercase;
       @media (max-width: $laptopWidth) {
         font-size: $fontSizeLittle-laptop;
       }
+      letter-spacing: 0.02em;
+      line-height: 130%;
+      text-transform: uppercase;
     }
     .close {
       font-size: $fontSizeSmall;
@@ -75,7 +65,7 @@
       }
     }
   }
-  .cartLink {
+  .favouritesLink {
     padding: 7px 35px;
     color: $mainColor;
     letter-spacing: 0.02em;

@@ -15,3 +15,6 @@ export { CatalogItemStyles }
 
 import CartItemStyles from './CartItem.module.scss'
 export { CartItemStyles }
+
+import FavouritesItemStyles from './FavouritesItem.module.scss'
+export { FavouritesItemStyles }

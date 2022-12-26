@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import Image from 'next/image'
-import { ICartItem } from 'types'
-import { CartItemStyles as styles } from 'styles/ui'
+import { cartActions } from 'store//slices'
 import { useAppDispatch } from 'hooks'
-import { cartActions } from 'store//slices/cartSlice'
+import { CartItemStyles as styles } from 'styles/ui'
+import { ICartItem } from 'types'
 
 export const CartItem: FC<ICartItem> = React.memo((props) => {
   const { color, id, img, price, quantity, size, title } = props

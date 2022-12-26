@@ -1,0 +1,71 @@
+@import '../variables.scss';
+
+.favouriteItem {
+  .favouriteImage {
+    position: relative;
+    .favouriteManagement {
+      opacity: 0;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      justify-content: space-between;
+      transition: opacity 0.4s linear;
+      &.favouriteActive {
+        opacity: 1;
+      }
+      .favouriteToCart {
+        background-color: rgb(221, 232, 246, 0.6);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .sizes {
+          margin-top: 8px;
+          display: flex;
+          column-gap: 10px;
+          button {
+            color: $mainColor;
+            padding: 1.5px 4px;
+            font-size: $fontSizeLittle;
+            @media (max-width: $laptopWidth) {
+              font-size: $fontSizeLittle-laptop;
+            }
+            &.activeSize {
+              background-color: $mainColor;
+              color: $white;
+            }
+          }
+        }
+        & > button {
+          margin: 5px 0 13px 0;
+          color: $mainColor;
+          font-size: $fontSizeLittle;
+          @media (max-width: $laptopWidth) {
+            font-size: $fontSizeLittle-laptop;
+          }
+        }
+      }
+      .deleteFavourite {
+        display: flex;
+        justify-content: flex-end;
+        img {
+          margin-top: 5px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  .favouriteInfo {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    p {
+      color: $mainColor;
+      font-size: $fontSizeLittle;
+      @media (max-width: $laptopWidth) {
+        font-size: $fontSizeLittle-laptop;
+      }
+    }
+  }
+}
