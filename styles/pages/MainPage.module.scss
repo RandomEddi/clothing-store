@@ -29,10 +29,7 @@
         margin-bottom: 30px;
 
         color: #ffffff;
-        font-size: $fontSizeLg;
-        @media (max-width: $laptopWidth) {
-          font-size: $fontSizeLg-laptop;
-        }
+        font-size: var(--fontSizeLg);
       }
     }
   }
@@ -57,10 +54,7 @@
         z-index: 100;
         text-align: center;
         p {
-          font-size: $fontSizeBig;
-          @media (max-width: $laptopWidth) {
-            font-size: $fontSizeBig-laptop;
-          }
+          font-size: var(--fontSizeBig);
           letter-spacing: 0.02em;
           text-transform: uppercase;
           margin-bottom: 30px;
@@ -86,10 +80,7 @@
       text-align: center;
       letter-spacing: 0.02em;
       font-weight: normal;
-      font-size: $fontSizeBig;
-      @media (max-width: $laptopWidth) {
-        font-size: $fontSizeBig-laptop;
-      }
+      font-size: var(--fontSizeBig);
     }
   }
 
@@ -123,12 +114,9 @@
     h6 {
       color: $mainColor;
       font-weight: normal;
-      font-size: $fontSizeLg;
+      font-size: var(--fontSizeLg);
       text-transform: uppercase;
       margin-bottom: 10px;
-      @media (max-width: $laptopWidth) {
-        font-size: $fontSizeLg-laptop;
-      }
     }
     p {
       margin-bottom: 10px;
@@ -149,22 +137,16 @@
   margin-top: 160px;
   color: $mainColor;
   & > p {
-    font-size: $fontSizeBig;
+    font-size: var(--fontSizeBig);
     text-align: center;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     margin-bottom: 30px;
-    @media (max-width: $laptopWidth) {
-      font-size: $fontSizeBig-laptop;
-    }
   }
   & > h4 {
     text-align: center;
     text-transform: uppercase;
-    font-size: $fontSizeLg;
-    @media (max-width: $laptopWidth) {
-      font-size: $fontSizeLg-laptop;
-    }
+    font-size: var(--fontSizeLg);
   }
   .instPhotos {
     margin-top: 80px;

@@ -31,6 +31,8 @@ const favourites: FC = () => {
                 key={fav.id}
                 height={419}
                 width={298}
+                category={fav.category}
+                structure={fav.structure}
               />
             ))}
           </div>

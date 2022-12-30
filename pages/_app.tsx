@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>LOYLEN</title>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel="icon" href="/icon.svg" type="image"></link>
+        <link rel='icon' href='/icon.svg' type='image'></link>
       </Head>
       <Provider store={store}>
         <Layout>

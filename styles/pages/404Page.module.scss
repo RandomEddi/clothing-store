@@ -8,18 +8,12 @@
   text-align: center;
   h4 {
     font-weight: normal;
-    font-size: $fontSizeLg;
-    @media (max-width: $laptopWidth) {
-      font-size: $fontSizeLg-laptop;      
-    }
+    font-size: var(--fontSizeLg);
     margin-bottom: 80px;
   }
   p {
     margin-bottom: 20px;
-    font-size: $fontSizeBig;
-    @media (max-width: $laptopWidth) {
-      font-size: $fontSizeBig-laptop;      
-    }
+    font-size: var(--fontSizeBig);
   }
   a {
     margin-top: 50px;

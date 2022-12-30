@@ -13,18 +13,12 @@
       margin-top: 18px;
       color: $mainColor;
       p {
-        font-size: $fontSizeBig;
-        @media (max-width: $laptopWidth) {
-          font-size: $fontSizeBig-laptop;
-        }
+        font-size: var(--fontSizeBig);
       }
       a {
         margin-top: 5px;
         &:first-of-type {
-          font-size: $fontSizeBig;
-          @media (max-width: $laptopWidth) {
-            font-size: $fontSizeBig-laptop;
-          }
+          font-size: var(--fontSizeBig);
         }
         &:last-of-type {
           font-size: 18px;

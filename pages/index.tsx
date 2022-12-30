@@ -1,21 +1,20 @@
-import Head from 'next/head'
-import { Button } from 'components/ui'
-import { MainPageStyles as styles } from 'styles/pages'
-import { CatalogItem } from 'components'
-import { useAppSelector, useWindowSize } from 'hooks'
 import { useState } from 'react'
 import Link from 'next/link'
+import { CatalogItem } from 'components'
+import { Button, buttonType } from 'components/ui'
+import { useAppSelector, useWindowSize } from 'hooks'
+import { MainPageStyles as styles } from 'styles/pages'
+import Image from 'next/image'
 
 export default function Home() {
   const [isCatalogFull, setIsCatalogFull] = useState<boolean>(false)
   const catalogItems = useAppSelector((state) => state.items.items)
   const { width } = useWindowSize()
   const styleToItems = width
-    ? {
-        justifyContent: width <= 991 ? 'center' : ''
-      }
+    ? { justifyContent: width <= 991 ? 'center' : '' }
     : {}
-  const endOfArray = isCatalogFull ? catalogItems.length : 6
+  const endOfArray = isCatalogFull ? 9 : 4
+
   return (
     <>
       <div className={styles.mainHeader}>
@@ -60,12 +59,15 @@ export default function Home() {
               title={catalItem.title}
               color={catalItem.color}
               priceWithDiscount={catalItem.priceWithDiscount}
+              category={catalItem.category}
+              structure={catalItem.structure}
             />
           ))}
         </div>
         {!isCatalogFull && (
           <div className={styles.catalogBtn}>
             <Button
+              type={buttonType.gray}
               clickHandler={() => {
                 setIsCatalogFull(true)
               }}
@@ -97,6 +99,12 @@ export default function Home() {
       <div className='container'>
         <div className={styles.ourInst}>
           <p>НАШ ИНСТАГРАМ</p>
+          <Image
+            src={'/items/catalog-items-1_1.jpg'}
+            height={200}
+            width={300}
+            alt='asd'
+          ></Image>
           <h4>@loylen_brand</h4>
           <div className={styles.instPhotos}>
             <div className={styles.instPhoto}>

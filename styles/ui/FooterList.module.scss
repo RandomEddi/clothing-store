@@ -14,10 +14,7 @@
     color: $mainColor;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    font-size: $fontSizeBig;
-    @media (max-width: $laptopWidth) {
-      font-size: $fontSizeBig-laptop;
-    }
+    font-size: var(--fontSizeBig);
   }
   .secondaryLink {
     a {

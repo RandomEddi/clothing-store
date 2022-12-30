@@ -1,4 +1,40 @@
 @import url('https://fonts.cdnfonts.com/css/futura-pt');
+
+:root {
+  --fontSizeLg: 68px;
+  --fontSizeBig: 31px;
+  --fontSizeMedium: 21px;
+  --fontSizeLittle: 18px;
+  --fontSizeSmall: 16px;
+}
+
+@media (max-width: 1440px) {
+  :root {
+    --fontSizeLg: 52px;
+    --fontSizeBig: 24px;
+    --fontSizeMedium: 16px;
+    --fontSizeLittle: 14px;
+    --fontSizeSmall: 12px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --fontSizeLg: 46px;
+    --fontSizeBig: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --fontSizeLg: 42px;
+    --fontSizeBig: 20px;
+    --fontSizeMedium: 13px;
+    --fontSizeLittle: 11px;
+    --fontSizeSmall: 9px;
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

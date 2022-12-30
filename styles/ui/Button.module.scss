@@ -6,15 +6,19 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   outline: 1px solid #474a51;
-  border-radius: 3px;
-  font-size: $fontSizeMedium;
-  @media (max-width: $laptopWidth) {
-    font-size: $fontSizeMedium-laptop;
+  font-size: var(--fontSizeMedium);
+  @media (max-width: $mobileWidth) {
+    padding: 10px 20px;
   }
   &:hover {
     background: $buttonColor !important;
     outline: 0;
     color: $mainColor !important;
+    &.gray {
+      background: $mainColor !important;
+      outline: 1px solid #ffffff;
+      color: $white !important;
+    }
   }
   transition: all 0.15s ease-in-out;
 }

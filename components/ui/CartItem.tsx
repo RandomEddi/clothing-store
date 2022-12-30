@@ -29,7 +29,7 @@ export const CartItem: FC<ICartItem> = React.memo((props) => {
     <>
       <div className={styles.cartItem}>
         <div className={styles.itemImg}>
-          <Image height={200} width={130} src={img} alt='cart item' />
+          <Image height={200} width={130} src={img[0]} alt='cart item' />
         </div>
         <div className={styles.itemDetails}>
           <div>
@@ -39,9 +39,9 @@ export const CartItem: FC<ICartItem> = React.memo((props) => {
                 <Image height={12} width={12} src='/close.svg' alt='close' />
               </button>
             </div>
-            <p className={styles.itemDetail}>
+            {size && <p className={styles.itemDetail}>
               Размер:&nbsp;<span>{size}</span>
-            </p>
+            </p>}
             <p className={styles.itemDetail}>
               Цвет:&nbsp;<span>{color}</span>
             </p>

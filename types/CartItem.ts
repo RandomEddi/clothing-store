@@ -1,10 +1,10 @@
 export interface ICartItem {
-  id: number
+  id: string
   title: string
   price: number
-  img: string
+  img: string[]
   articul: number
-  size: number
+  size: number | null
   color: string
   quantity?: number
 }

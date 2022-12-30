@@ -19,7 +19,7 @@ export const favouritesSlice = createSlice({
     addToFavourites(state, action: PayloadAction<IItem>) {
       state.items = [action.payload, ...state.items]
     },
-    deleteFromFavourites(state, action: PayloadAction<{ id: number }>) {
+    deleteFromFavourites(state, action: PayloadAction<{ id: string }>) {
       const { id } = action.payload
       state.items = state.items.filter((item) => {
         if (id !== item.id) {

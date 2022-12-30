@@ -27,10 +27,7 @@
           button {
             color: $mainColor;
             padding: 1.5px 4px;
-            font-size: $fontSizeLittle;
-            @media (max-width: $laptopWidth) {
-              font-size: $fontSizeLittle-laptop;
-            }
+            font-size: var(--fontSizeLittle);
             &.activeSize {
               background-color: $mainColor;
               color: $white;
@@ -40,10 +37,7 @@
         & > button {
           margin: 5px 0 13px 0;
           color: $mainColor;
-          font-size: $fontSizeLittle;
-          @media (max-width: $laptopWidth) {
-            font-size: $fontSizeLittle-laptop;
-          }
+          font-size: var(--fontSizeLittle);
         }
       }
       .deleteFavourite {
@@ -62,10 +56,7 @@
     justify-content: space-between;
     p {
       color: $mainColor;
-      font-size: $fontSizeLittle;
-      @media (max-width: $laptopWidth) {
-        font-size: $fontSizeLittle-laptop;
-      }
+      font-size: var(--fontSizeLittle);
     }
   }
 }

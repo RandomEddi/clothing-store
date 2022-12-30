@@ -48,21 +48,15 @@
     align-items: center;
     & > span {
       color: $mainColor;
-      font-size: $fontSizeLittle;
-      @media (max-width: $laptopWidth) {
-        font-size: $fontSizeLittle-laptop;
-      }
+      font-size: var(--fontSizeLittle);
       letter-spacing: 0.02em;
       line-height: 130%;
       text-transform: uppercase;
     }
     .close {
-      font-size: $fontSizeSmall;
+      font-size: var(--fontSizeSmall);
       line-height: 130%;
       color: #9f9d9d;
-      @media (max-width: $laptopWidth) {
-        font-size: $fontSizeSmall-laptop;
-      }
     }
   }
   .favouritesLink {
@@ -72,10 +66,7 @@
     text-transform: uppercase;
     outline: 1px solid #474a51;
     text-align: center;
-    font-size: $fontSizeMedium;
-    @media (max-width: $laptopWidth) {
-      font-size: $fontSizeMedium-laptop;
-    }
+    font-size: var(--fontSizeMedium);
     &:hover {
       background: $buttonColor;
       outline: 0;

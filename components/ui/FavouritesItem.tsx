@@ -34,7 +34,6 @@ export const FavouritesItem: FC<IItem & photosSettings> = React.memo(
         setSelectedSize(size)
       }
     }
-    console.log('asd');
     
     const deleteFavouriteHandler = () => {
       dispatch(favouritesActions.deleteFromFavourites({ id }))
@@ -49,7 +48,7 @@ export const FavouritesItem: FC<IItem & photosSettings> = React.memo(
     }
 
     const onAddToCartHandler = () => {
-      if (selectedSize) {
+      if (!sizes || selectedSize) {
         dispatch(
           cartActions.addToCart({
             articul,
@@ -74,7 +73,7 @@ export const FavouritesItem: FC<IItem & photosSettings> = React.memo(
           <Image
             height={height}
             width={width}
-            src={img}
+            src={img[0]}
             alt='favoutire photo'
           ></Image>
           <div
@@ -94,7 +93,7 @@ export const FavouritesItem: FC<IItem & photosSettings> = React.memo(
             </div>
             <div className={styles.favouriteToCart}>
               <div className={styles.sizes}>
-                {sizes.map((size) => (
+                {sizes?.map((size) => (
                   <button
                     key={size}
                     onClick={() => chooseSizeHandler(size)}

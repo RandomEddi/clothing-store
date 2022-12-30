@@ -1,10 +1,12 @@
 export interface IItem {
-  id: number
+  id: string
   title: string
   price: number
-  img: string
+  img: string[]
   articul: number
-  sizes: number[]
+  sizes?: number[]
   color: string
   priceWithDiscount?: number
+  category: string
+  structure: string
 }

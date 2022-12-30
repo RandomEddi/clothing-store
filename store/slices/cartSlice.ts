@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ICart, ICartItem } from 'types'
 
 interface TypeToChange {
-  id: number
-  size: number
+  id: string
+  size: number | null
 }
 
 const initialState: ICart = {
@@ -21,7 +21,7 @@ export const cartSlice = createSlice({
       state.cartIsOpen = !state.cartIsOpen
     },
     closeCart(state) {
-      state.cartIsOpen = false      
+      state.cartIsOpen = false
     },
     addToCart(state, action: PayloadAction<ICartItem>) {
       const payloadItem = action.payload

@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import { cartActions, favouritesActions } from 'store//slices'
 import { useAppDispatch, useAppSelector } from 'hooks'
@@ -6,13 +7,23 @@ import { CatalogItemStyles as styles } from 'styles/ui'
 import { IItem } from 'types'
 
 export const CatalogItem: FC<IItem> = React.memo((props) => {
-  const { img, price, color, sizes, title, articul, id, priceWithDiscount } =
-    props
+  const {
+    img,
+    price,
+    color,
+    sizes,
+    title,
+    articul,
+    id,
+    priceWithDiscount,
+    category
+  } = props
   const dispatch = useAppDispatch()
   const [selectedSize, setSelectedSize] = useState<number | null>(null)
   const [itemIsFocused, setItemIsFocused] = useState<boolean>(false)
   const favouritesItems = useAppSelector((state) => state.favourites.items)
   const isFavouriteActive = !!favouritesItems.find((i) => i.id === id)
+  console.log(sizes)
 
   const chooseSizeHandler = (size: number) => {
     if (size === selectedSize) {
@@ -31,7 +42,7 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
   }
 
   const onAddToCartHandler = () => {
-    if (selectedSize) {
+    if (!sizes || selectedSize) {
       dispatch(
         cartActions.addToCart({
           articul,
@@ -48,17 +59,7 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
 
   const addToFavouriteHandler = () => {
     if (!isFavouriteActive) {
-      dispatch(
-        favouritesActions.addToFavourites({
-          title,
-          articul,
-          color,
-          id,
-          img,
-          price,
-          sizes
-        })
-      )
+      dispatch(favouritesActions.addToFavourites(props))
     } else {
       dispatch(favouritesActions.deleteFromFavourites({ id }))
     }
@@ -70,46 +71,72 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
       onMouseOver={onItemFocusHandler}
       onMouseLeave={onItemBlurHandler}
     >
-      <div className={styles.itemImage}>
-        <Image
-          className={styles.itemPhoto}
-          height={600}
-          width={400}
-          src={img}
-          alt={title}
-        ></Image>
-        <div
-          className={`${styles.itemManagement}${
-            itemIsFocused ? ` ${styles.itemIsHovered}` : ''
-          }`}
-        >
-          <div className={styles.itemToFavourite}>
-            <button onClick={addToFavouriteHandler}>
-              {isFavouriteActive ? (
-                <Image height={20} width={18} src='/favourite-active.svg' alt='favourite svg' />
-              ) : (
-                <Image height={20} width={18} src='/favourite.svg' alt='favourite svg' />
-              )}
-            </button>
-          </div>
-          <div className={styles.itemToCart}>
-            <div className={styles.itemSizes}>
-              {sizes.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => chooseSizeHandler(size)}
-                  className={`${styles.itemSize}${
-                    selectedSize === size ? ` ${styles.activeSize}` : ''
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
+      <Link href={`/catalog/${category}/${id}`}>
+        <div className={styles.itemImage}>
+          <Image
+            style={{ opacity: img[1] && itemIsFocused ? 0 : 1 }}
+            className={styles.itemPhoto}
+            height={600}
+            width={400}
+            src={img[0]}
+            alt={title}
+          ></Image>
+
+          {img[1] && (
+            <Image
+              style={{ opacity: itemIsFocused ? 1 : 0 }}
+              className={styles.itemPhoto}
+              height={600}
+              width={400}
+              src={img[1]}
+              alt={title}
+            ></Image>
+          )}
+
+          <div
+            className={`${styles.itemManagement}${
+              itemIsFocused ? ` ${styles.itemIsHovered}` : ''
+            }`}
+          >
+            <div className={styles.itemToFavourite}>
+              <button onClick={addToFavouriteHandler}>
+                {isFavouriteActive ? (
+                  <Image
+                    height={20}
+                    width={18}
+                    src='/favourite-active.svg'
+                    alt='favourite svg'
+                  />
+                ) : (
+                  <Image
+                    height={20}
+                    width={18}
+                    src='/favourite.svg'
+                    alt='favourite svg'
+                  />
+                )}
+              </button>
             </div>
-            <button onClick={onAddToCartHandler}>Добавить в корзину</button>
+            <div className={styles.itemToCart}>
+              <div className={styles.itemSizes}>
+                {sizes?.map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => chooseSizeHandler(size)}
+                    className={`${styles.itemSize}${
+                      selectedSize === size ? ` ${styles.activeSize}` : ''
+                    }`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+              <button onClick={onAddToCartHandler}>Добавить в корзину</button>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
+
       <div className={styles.itemTitle}>
         <p>{title}</p>
       </div>
