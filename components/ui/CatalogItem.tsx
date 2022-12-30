@@ -23,7 +23,6 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
   const [itemIsFocused, setItemIsFocused] = useState<boolean>(false)
   const favouritesItems = useAppSelector((state) => state.favourites.items)
   const isFavouriteActive = !!favouritesItems.find((i) => i.id === id)
-  console.log(sizes)
 
   const chooseSizeHandler = (size: number) => {
     if (size === selectedSize) {
@@ -58,6 +57,7 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
   }
 
   const addToFavouriteHandler = () => {
+    
     if (!isFavouriteActive) {
       dispatch(favouritesActions.addToFavourites(props))
     } else {
@@ -92,7 +92,6 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
               alt={title}
             ></Image>
           )}
-
           <div
             className={`${styles.itemManagement}${
               itemIsFocused ? ` ${styles.itemIsHovered}` : ''

@@ -1,0 +1,44 @@
+.sliderDots {
+  column-gap: 3px;
+}
+
+.sliderButton {
+  width: 50px;
+  background-color: rgba(173, 173, 173, 0.425) !important;
+  position: relative;
+  color: rgba(128, 128, 128, 0) !important;
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    background: white;
+    height: 2px;
+    width: 13.5px;
+  }
+  &.prevButton {
+    &::after {
+      left: 15px;
+      transform: rotate(-35deg);
+      top: 13.2px;
+    }
+
+    &::before {
+      top: 20px;
+      transform: rotate(35deg);
+      left: 15px;
+    }
+  }
+  &.nextButton {
+    &::after {
+      right: 15px;
+      transform: rotate(35deg);
+      top: 13.2px;
+    }
+
+    &::before {
+      top: 20px;
+      transform: rotate(-35deg);
+      right: 15px;
+    }
+  }
+}

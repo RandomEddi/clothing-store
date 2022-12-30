@@ -18,3 +18,6 @@ export { CartItemStyles }
 
 import FavouritesItemStyles from './FavouritesItem.module.scss'
 export { FavouritesItemStyles }
+
+import CarouselAppStyles from './CarouselApp.module.scss'
+export { CarouselAppStyles }

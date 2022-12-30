@@ -20,11 +20,13 @@ export const getItems = (dispatch: AppDispatch) => async () => {
     })
 }
 
-export const getCertainItem = async (
-  id: string
-): Promise<IItem | ErrorResponse> => {
-  const { data } = await appApiInstance.get<IItem | ErrorResponse>(
-    `/catalog/${id}`
-  )
-  return data
+export const getCertainItem = async (id: string) => {
+  try {
+    const { data } = await appApiInstance.get<IItem>(`/catalog/${id}`)
+    if (!data) return null
+    return data
+  } catch (e) {
+    const error = e as ErrorResponse
+    console.log(error.message)
+  }
 }
