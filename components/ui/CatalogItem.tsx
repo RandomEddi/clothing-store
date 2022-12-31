@@ -4,9 +4,9 @@ import Image from 'next/image'
 import { cartActions, favouritesActions } from 'store//slices'
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { CatalogItemStyles as styles } from 'styles/ui'
-import { IItem } from 'types'
+import { IItem, IPhotoSettings } from 'types'
 
-export const CatalogItem: FC<IItem> = React.memo((props) => {
+export const CatalogItem: FC<IItem & IPhotoSettings> = React.memo((props) => {
   const {
     img,
     price,
@@ -16,7 +16,9 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
     articul,
     id,
     priceWithDiscount,
-    category
+    category,
+    height,
+    width
   } = props
   const dispatch = useAppDispatch()
   const [selectedSize, setSelectedSize] = useState<number | null>(null)
@@ -57,7 +59,6 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
   }
 
   const addToFavouriteHandler = () => {
-    
     if (!isFavouriteActive) {
       dispatch(favouritesActions.addToFavourites(props))
     } else {
@@ -72,12 +73,15 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
       onMouseLeave={onItemBlurHandler}
     >
       <Link href={`/catalog/${category}/${id}`}>
-        <div className={styles.itemImage}>
+        <div
+          style={{ width: `${width}px`, height: `${height}px` }}
+          className={styles.itemImage}
+        >
           <Image
             style={{ opacity: img[1] && itemIsFocused ? 0 : 1 }}
             className={styles.itemPhoto}
-            height={600}
-            width={400}
+            height={height}
+            width={width}
             src={img[0]}
             alt={title}
           ></Image>
@@ -86,8 +90,8 @@ export const CatalogItem: FC<IItem> = React.memo((props) => {
             <Image
               style={{ opacity: itemIsFocused ? 1 : 0 }}
               className={styles.itemPhoto}
-              height={600}
-              width={400}
+              height={height}
+              width={width}
               src={img[1]}
               alt={title}
             ></Image>

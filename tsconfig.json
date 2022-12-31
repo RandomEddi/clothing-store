@@ -23,6 +23,7 @@
       "hooks/*": ["./hooks/*"],
       "api/*": ["./api/*"],
       "public/*": ["./public/*"],
+      "utils/*": ["./utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

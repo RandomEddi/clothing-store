@@ -1,4 +1,4 @@
-import { ICartItem } from './CartItem'
+import { ICartItem } from 'types'
 
 export interface ICart {
   cartIsOpen: boolean

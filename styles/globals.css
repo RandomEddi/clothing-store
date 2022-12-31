@@ -6,6 +6,7 @@
   --fontSizeMedium: 21px;
   --fontSizeLittle: 18px;
   --fontSizeSmall: 16px;
+  --fontSizeItemTitle: 47px;
 }
 
 @media (max-width: 1440px) {
@@ -15,6 +16,7 @@
     --fontSizeMedium: 16px;
     --fontSizeLittle: 14px;
     --fontSizeSmall: 12px;
+    --fontSizeItemTitle: 36px;
   }
 }
 
@@ -22,6 +24,7 @@
   :root {
     --fontSizeLg: 46px;
     --fontSizeBig: 22px;
+    --fontSizeItemTitle: 30px;
   }
 }
 

@@ -5,20 +5,34 @@
   color: $mainColor;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  outline: 1px solid #474a51;
   font-size: var(--fontSizeMedium);
-  @media (max-width: $mobileWidth) {
-    padding: 10px 20px;
+  &.default {
+    outline: 1px solid #474a51;
+  }
+  &.gray {
+    outline: 1px solid #474a51;
+  }
+  &.blue {
+    background: $buttonColor;
+    color: $mainColor;
+  }
+  &.cartActive {
+    color: $white;
+    background: #838e9c;
   }
   &:hover {
-    background: $buttonColor !important;
-    outline: 0;
-    color: $mainColor !important;
+    &.default {
+      background: $buttonColor !important;
+      color: $mainColor !important;
+    }
     &.gray {
       background: $mainColor !important;
       outline: 1px solid #ffffff;
       color: $white !important;
     }
+  }
+  @media (max-width: $mobileWidth) {
+    padding: 10px 20px;
   }
   transition: all 0.15s ease-in-out;
 }

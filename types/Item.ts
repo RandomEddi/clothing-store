@@ -1,3 +1,5 @@
+import { ItemCategoryType } from 'types'
+
 export interface IItem {
   id: string
   title: string
@@ -7,6 +9,6 @@ export interface IItem {
   sizes?: number[]
   color: string
   priceWithDiscount?: number
-  category: string
+  category: ItemCategoryType
   structure: string
 }

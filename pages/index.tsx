@@ -13,7 +13,7 @@ export default function Home() {
   const styleToItems = width
     ? { justifyContent: width <= 991 ? 'center' : '' }
     : {}
-  const endOfArray = isCatalogFull ? 9 : 4
+  const endOfArray = isCatalogFull ? 9 : 3
 
   return (
     <>
@@ -50,17 +50,10 @@ export default function Home() {
         >
           {catalogItems.slice(0, endOfArray).map((catalItem) => (
             <CatalogItem
+              height={600}
+              width={400}
               key={catalItem.id}
-              id={catalItem.id}
-              img={catalItem.img}
-              articul={catalItem.articul}
-              price={catalItem.price}
-              sizes={catalItem.sizes}
-              title={catalItem.title}
-              color={catalItem.color}
-              priceWithDiscount={catalItem.priceWithDiscount}
-              category={catalItem.category}
-              structure={catalItem.structure}
+              {...catalItem}
             />
           ))}
         </div>
@@ -99,12 +92,6 @@ export default function Home() {
       <div className='container'>
         <div className={styles.ourInst}>
           <p>НАШ ИНСТАГРАМ</p>
-          <Image
-            src={'/items/catalog-items-1_1.jpg'}
-            height={200}
-            width={300}
-            alt='asd'
-          ></Image>
           <h4>@loylen_brand</h4>
           <div className={styles.instPhotos}>
             <div className={styles.instPhoto}>

@@ -24,6 +24,7 @@ export const getCertainItem = async (id: string) => {
   try {
     const { data } = await appApiInstance.get<IItem>(`/catalog/${id}`)
     if (!data) return null
+    data.id = id
     return data
   } catch (e) {
     const error = e as ErrorResponse

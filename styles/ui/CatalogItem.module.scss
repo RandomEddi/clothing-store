@@ -3,11 +3,9 @@
 .catalogItem {
   .itemImage {
     position: relative;
-    width: 400px;
-    height: 600px;
     z-index: 99;
     img {
-      transition: all .3s;
+      transition: all 0.3s;
     }
     .itemPhoto {
       position: absolute;

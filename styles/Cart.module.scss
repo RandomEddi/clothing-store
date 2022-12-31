@@ -36,7 +36,7 @@
       background-color: #eeeeee;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: #9f9d9d;
+      background-color: $gray;
       border-radius: 10px;
     }
   }
@@ -63,7 +63,7 @@
     .close {
       font-size: var(--fontSizeSmall);
       line-height: 130%;
-      color: #9f9d9d;
+      color: $gray;
     }
   }
   .cartLink {

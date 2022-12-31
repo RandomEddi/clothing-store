@@ -1,4 +1,4 @@
-import { IItem } from './'
+import { IItem } from 'types'
 
 export interface IFavourite {
   favouritesIsOpen: boolean

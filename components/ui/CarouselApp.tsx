@@ -19,8 +19,7 @@ export const CarouselApp: FC<Props> = (props) => {
       }}
       pauseOnHover={false}
       adaptiveHeightAnimation
-      wrapAround={true}
-      animation='zoom'
+      wrapAround={photos.length > 1}
     >
       {photos.map((photo, idx) => (
         <Image

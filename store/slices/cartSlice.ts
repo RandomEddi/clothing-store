@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ICart, ICartItem } from 'types'
 
-interface TypeToChange {
+interface TypeIdAndSize {
   id: string
   size: number | null
 }
@@ -45,7 +45,7 @@ export const cartSlice = createSlice({
       state.quantity += 1
       state.totalAmount += payloadItem.price
     },
-    deleteItemFromCart(state, action: PayloadAction<TypeToChange>) {
+    deleteItemFromCart(state, action: PayloadAction<TypeIdAndSize>) {
       const payload = action.payload
       state.items = state.items.filter((i) => {
         if (i.size === payload.size && i.id === payload.id) {
@@ -57,7 +57,7 @@ export const cartSlice = createSlice({
         return i
       })
     },
-    increaseQuantityItem(state, action: PayloadAction<TypeToChange>) {
+    increaseQuantityItem(state, action: PayloadAction<TypeIdAndSize>) {
       const payload = action.payload
       state.items.map((i) => {
         if (i.id === payload.id && i.size === payload.size) {
@@ -69,7 +69,7 @@ export const cartSlice = createSlice({
         return i
       })
     },
-    decreaseQuantityItem(state, action: PayloadAction<TypeToChange>) {
+    decreaseQuantityItem(state, action: PayloadAction<TypeIdAndSize>) {
       const payload = action.payload
       state.items.map((i) => {
         if (i.id === payload.id && i.size === payload.size) {

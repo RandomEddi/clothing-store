@@ -37,13 +37,13 @@
         border: 0;
         padding-bottom: 2.5px;
         outline: 0;
-        border-bottom: 1px solid #9f9d9d;
+        border-bottom: 1px solid $gray;
         width: 0;
         margin-right: 10px;
         transition: width 0.4s;
-        color: #9f9d9d;
+        color: $gray;
         &::placeholder {
-          color: #9f9d9d;
+          color: $gray;
         }
         &.active {
           width: 200px;

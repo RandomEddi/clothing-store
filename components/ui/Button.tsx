@@ -3,7 +3,9 @@ import { ButtonStyles as styles } from 'styles/ui'
 
 export enum buttonType {
   default = 'default',
-  gray = 'gray'
+  blue = 'blue',
+  gray = 'gray',
+  cartActive = 'cartActive'
 }
 
 interface Props {
@@ -17,8 +19,12 @@ export const Button: FC<Props> = ({
   clickHandler,
   type = buttonType.default
 }: Props) => {
+  const secondClass = styles[type]
   return (
-    <button onClick={clickHandler} className={`${styles.button}${type === buttonType.gray ? ` ${styles.gray}` : ''}`}>
+    <button
+      onClick={clickHandler}
+      className={`${styles.button} ${secondClass}`}
+    >
       {children}
     </button>
   )
