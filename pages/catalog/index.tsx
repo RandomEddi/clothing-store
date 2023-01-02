@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Button } from 'components/ui'
+import { CatalogPageStyles as styles } from 'styles/pages'
 
 export default function Home() {
   return (
@@ -8,7 +8,9 @@ export default function Home() {
         <title>LOYLEN Catalog</title>
         <meta name='description' content='clothes catalog LOYLEN' />
       </Head>
-      <Button>asdsadsada</Button>
+      <div className={`${styles.catalogPage} container`}>
+        <h3 className={styles.pageHeader}>Каталог</h3>
+      </div>
     </>
   )
 }

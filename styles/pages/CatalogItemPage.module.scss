@@ -2,16 +2,7 @@
 
 .catalogItemPage {
   .path {
-    color: $mainColor;
-    font-size: var(--fontSizeMedium);
     margin: 30px 0;
-    .delimiter {
-      margin: 0 3px;
-    }
-    .big {
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
   }
   .mayLikeIt {
     margin-top: 160px;

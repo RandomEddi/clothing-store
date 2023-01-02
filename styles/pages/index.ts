@@ -10,5 +10,8 @@ export { FavouritesPageStyles }
 import NotFoundPageStyles from './404Page.module.scss'
 export { NotFoundPageStyles }
 
+import CatalogPageStyles from './CatalogPage.module.scss'
+export { CatalogPageStyles }
+
 import CatalogItemPageStyles from './CatalogItemPage.module.scss'
 export { CatalogItemPageStyles }

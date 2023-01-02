@@ -21,3 +21,6 @@ export { FavouritesItemStyles }
 
 import CarouselAppStyles from './CarouselApp.module.scss'
 export { CarouselAppStyles }
+
+import PagePathStyles from './PagePath.module.scss'
+export { PagePathStyles }

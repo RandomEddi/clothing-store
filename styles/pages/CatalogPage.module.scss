@@ -1,0 +1,14 @@
+@import '../variables.scss';
+
+.catalogPage {
+  margin-top: 50px;
+  .pageHeader {
+    text-align: center;
+    margin-bottom: 30px;
+    color: $mainColor;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: var(--fontSizeLg);
+    font-family: 'Lovelace', 'Gill Sans';
+  }
+}

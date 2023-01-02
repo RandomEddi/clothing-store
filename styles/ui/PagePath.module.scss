@@ -1,0 +1,13 @@
+@import '../variables.scss';
+
+.path {
+  color: $mainColor;
+  font-size: var(--fontSizeMedium);
+  .delimiter {
+    margin: 0 3px;
+  }
+  .big {
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+}

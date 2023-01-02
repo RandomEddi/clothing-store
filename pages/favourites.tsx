@@ -1,20 +1,18 @@
 import React, { FC } from 'react'
-import Head from 'next/head'
 import { FavouritesPageStyles as styles } from 'styles/pages'
 import { useAppSelector } from 'hooks/useAppSelector'
 import { FavouritesItem } from 'components/ui/FavouritesItem'
 import Link from 'next/link'
-import { Button } from 'components/ui'
+import { Button, PagePath } from 'components/ui'
 
 const favourites: FC = () => {
   const favouritesItems = useAppSelector((state) => state.favourites.items)
   return (
     <>
       <div className={`${styles.favouritesPage} container`}>
-        <p className={styles.path}>
-          Главная<span className={styles.delimiter}>/</span>
-          <span className={styles.big}>Избранные товары</span>
-        </p>
+        <div>
+          <PagePath section='Избранные товары' />
+        </div>
         <h4 className={styles.favouriteTitle}>ЛЮБИМЫЕ ТОВАРЫ</h4>
         {favouritesItems.length > 0 ? (
           <div className={styles.favouritesItems}>

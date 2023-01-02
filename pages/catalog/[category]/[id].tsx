@@ -1,12 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { getCertainItem } from 'api'
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppSelector } from 'hooks'
 import { CatalogPageItem } from 'components'
-import { CatalogItem } from 'components/ui'
+import { CatalogItem, PagePath } from 'components/ui'
 import { IItem, EnumItemCategoryObject } from 'types'
 import styles from 'styles/pages/CatalogItemPage.module.scss'
-import { cartActions } from 'store//slices'
 import { shuffleArray } from 'utils/shuffleArray'
 
 const CatalogItemPage: FC = () => {
@@ -14,13 +13,11 @@ const CatalogItemPage: FC = () => {
   const router = useRouter()
   const { id } = router.query
   const itemCategory = currentItem?.category
-  const dispatch = useAppDispatch()
   const mayLikeItems = shuffleArray(
     useAppSelector((state) => state.items.items).filter(
       (i) => i.category === currentItem?.category && i.id !== currentItem.id
     )
   )
-  
 
   useEffect(() => {
     if (!id) return
@@ -39,20 +36,17 @@ const CatalogItemPage: FC = () => {
     }
   }, [id])
 
-  
-
   return (
     <>
       {itemCategory && currentItem && (
         <div className={`${styles.catalogItemPage} container`}>
-          <p className={styles.path}>
-            Главная<span className={styles.delimiter}>/</span>
-            Каталог
-            <span className={styles.delimiter}>/</span>
-            {EnumItemCategoryObject[itemCategory]}
-            <span className={styles.delimiter}>/</span>
-            <span className={styles.big}>{currentItem.title}</span>
-          </p>
+          <div className={styles.path}>
+            <PagePath
+              section='Каталог'
+              category={EnumItemCategoryObject[itemCategory]}
+              title={currentItem.title}
+            />
+          </div>
           <CatalogPageItem {...currentItem} />
           {mayLikeItems.length > 0 && (
             <div className={styles.mayLikeIt}>
