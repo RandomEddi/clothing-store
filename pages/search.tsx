@@ -11,11 +11,11 @@ const search: FC = () => {
   const router = useRouter()
   const searchQuery = router.query.query
   const items = useAppSelector((state) => state.items.items)
-
   const itemsBySearch = items.filter((i) => {
     if (
       !Array.isArray(searchQuery) &&
-      i.title.toLowerCase().includes(`${searchQuery}`.toLowerCase())
+      (i.title.toLowerCase().includes(`${searchQuery}`.toLowerCase()) ||
+        String(i.articul) === `${searchQuery}`)
     ) {
       return i
     }
@@ -39,11 +39,7 @@ const search: FC = () => {
             <p>ТОВАРЫ ПО ЗАПРОСУ «{searchQuery}» </p>
             <div>
               {itemsBySearch.map((item) => (
-                <CatalogItem
-                  {...item}
-                  height={420}
-                  width={300}
-                />
+                <CatalogItem {...item} height={420} width={300} />
               ))}
             </div>
           </div>
