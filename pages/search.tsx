@@ -40,14 +40,9 @@ const search: FC = () => {
             <div>
               {itemsBySearch.map((item) => (
                 <CatalogItem
-                  articul={item.articul}
-                  color={item.color}
-                  id={item.id}
-                  img={item.img}
-                  price={item.price}
-                  priceWithDiscount={item.priceWithDiscount}
-                  sizes={item.sizes}
-                  title={item.title}
+                  {...item}
+                  height={420}
+                  width={300}
                 />
               ))}
             </div>

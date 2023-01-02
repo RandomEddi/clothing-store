@@ -1,0 +1,79 @@
+@import './variables.scss';
+
+.catalogItem {
+  display: flex;
+  .imageSlider {
+    width: 400px;
+    margin-right: 30px;
+  }
+  .catalogItemInfo {
+    .catalogItemArticul {
+      color: $gray;
+      font-size: var(--fontSizeSmall);
+      margin-bottom: 20px;
+    }
+    .catalogItemTitle {
+      font-size: var(--fontSizeItemTitle);
+      text-transform: uppercase;
+      font-weight: normal;
+      font-family: 'Lovelace', 'Gill Sans';
+      margin-bottom: 30px;
+    }
+    .catalogItemColor {
+      margin: 30px 0;
+      color: $mainColor;
+      font-size: var(--fontSizeMedium);
+    }
+    .catalogItemSizes {
+      display: flex;
+      column-gap: 10px;
+      margin-bottom: 5px;
+      button {
+        padding: 6px 4px;
+        font-size: var(--fontSizeBig);
+        text-align: center;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: $mainColor;
+        &.active {
+          background-color: $accentColor;
+          color: $white;
+        }
+      }
+    }
+    .catalogItemPrice {
+      display: flex;
+      column-gap: 10px;
+      letter-spacing: 0.02em;
+      font-size: var(--fontSizeBig);
+      text-transform: uppercase;
+    }
+    .catalogItemManagement {
+      margin-top: 30px;
+      button {
+        margin-right: 20px;
+      }
+    }
+    .catalogItemStructure {
+      margin-top: 30px;
+      p {
+        font-size: var(--fontSizeSmall);
+      }
+      .structureTitle {
+        color: $mainColor;
+        margin-bottom: 5px;
+      }
+      .structureDesc {
+        color: $gray;
+        &::first-letter {
+          text-transform: uppercase;
+        }
+      }
+    }
+    .linkToSize {
+      color: $gray;
+      font-size: var(--fontSizeSmall);
+      margin-bottom: 30px;
+    }
+  }
+}
