@@ -12,9 +12,9 @@
     }
     & > div {
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 80px;
+      gap: 30px;
     }
   }
   .itemsEmpty {

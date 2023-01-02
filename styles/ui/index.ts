@@ -24,3 +24,6 @@ export { CarouselAppStyles }
 
 import PagePathStyles from './PagePath.module.scss'
 export { PagePathStyles }
+
+import SortCheckFilterStyles from './SortCheckFilter.module.scss'
+export { SortCheckFilterStyles }

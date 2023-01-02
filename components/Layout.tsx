@@ -10,14 +10,10 @@ interface Props {
 
 export const Layout: FC<Props> = React.memo(({ children }: Props) => {
   const dispatch = useAppDispatch()
-  let initRender: boolean = false
   useEffect(() => {
-    //TODO: 2 рендера какого хуя
-    if (!initRender) {
-      getItems(dispatch)()
-    }
-    initRender = true
+    getItems(dispatch)()
   }, [])
+
   return (
     <>
       <Notification text='Бесплатная доставка при заказе от 10 000 руб по Москве и Московской области' />

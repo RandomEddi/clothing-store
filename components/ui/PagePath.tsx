@@ -7,7 +7,7 @@ interface Props {
   title?: string
 }
 
-export const PagePath: FC<Props> = (props) => {
+export const PagePath: FC<Props> = React.memo((props) => {
   const { section, category, title } = props
   return (
     <p className={styles.path}>
@@ -28,4 +28,4 @@ export const PagePath: FC<Props> = (props) => {
       )}
     </p>
   )
-}
+})

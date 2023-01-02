@@ -31,8 +31,8 @@ export const Header: FC = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const [searchIsActive, setSearchIsActive] = useState<boolean>(false)
-  const cartQuantity = useAppSelector((state) => state.cartReducer.quantity)
   const [searchValue, setSearchValue] = useState<string>('')
+  const cartQuantity = useAppSelector((state) => state.cartReducer.quantity)
 
   const toggleCartHandler = () => {
     dispatch(favouritesActions.closeFavourites())

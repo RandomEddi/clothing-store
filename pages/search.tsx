@@ -39,7 +39,7 @@ const search: FC = () => {
             <p>ТОВАРЫ ПО ЗАПРОСУ «{searchQuery}» </p>
             <div>
               {itemsBySearch.map((item) => (
-                <CatalogItem {...item} height={420} width={300} />
+                <CatalogItem {...item} height={420} width={290} />
               ))}
             </div>
           </div>
