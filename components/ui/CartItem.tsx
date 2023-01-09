@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { cartActions } from 'store//slices'
 import { useAppDispatch } from 'hooks'
 import { CartItemStyles as styles } from 'styles/ui'
-import { ICartItem } from 'types'
+import { ICartItem, ItemColorObject, ItemColorType } from 'types'
 
 export const CartItem: FC<ICartItem> = React.memo((props) => {
   const { color, id, img, price, quantity, size, title } = props
@@ -43,7 +43,7 @@ export const CartItem: FC<ICartItem> = React.memo((props) => {
               Размер:&nbsp;<span>{size}</span>
             </p>}
             <p className={styles.itemDetail}>
-              Цвет:&nbsp;<span>{color}</span>
+              Цвет:&nbsp;<span>{ItemColorObject[color as ItemColorType]}</span>
             </p>
             <div className={styles.itemQuantity}>
               Количество:&nbsp;

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { IItem } from 'types'
+import { IItem, ItemColorObject, ItemColorType } from 'types'
 import { CatalogPageItemStyles as styles } from 'styles'
 import { Button, buttonType, CarouselApp } from 'components/ui'
 import Link from 'next/link'
@@ -79,10 +79,16 @@ export const CatalogPageItem: FC<IItem> = (props) => {
             Таблица размеров
           </Link>
         )}
-        <div className={styles.catalogItemColor}>Цвет: {color}</div>
+        <div className={styles.catalogItemColor}>
+          Цвет: {ItemColorObject[color as ItemColorType]}
+        </div>
         <div className={styles.catalogItemPrice}>
           {priceWithDiscount && <p>{priceWithDiscount}</p>}
-          <p style={{textDecoration: priceWithDiscount ? 'line-through' : ''}}>{price} &#8381;</p>
+          <p
+            style={{ textDecoration: priceWithDiscount ? 'line-through' : '' }}
+          >
+            {price} &#8381;
+          </p>
         </div>
         <div className={styles.catalogItemManagement}>
           <Button

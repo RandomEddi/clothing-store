@@ -23,6 +23,7 @@ import {
   ICatalogQueryParams
 } from 'types'
 import { getItems } from 'api/items'
+import { shuffleArray } from 'utils/shuffleArray'
 
 const DUMMY_CATEGORY_CHECKBOXES: ICheckBox[] = Object.keys(
   ItemCategoryObject
@@ -77,9 +78,13 @@ export default function catalog() {
     [categoryCheckBoxes]
   )
 
-  const arrayOfCheckedColors = useMemo(() => colorCheckBoxes
-    .map((i) => (i.isChecked ? i.param : ''))
-    .filter((i) => (i ? i : '')), [colorCheckBoxes])
+  const arrayOfCheckedColors = useMemo(
+    () =>
+      colorCheckBoxes
+        .map((i) => (i.isChecked ? i.param : ''))
+        .filter((i) => (i ? i : '')),
+    [colorCheckBoxes]
+  )
 
   const arrayOfCheckedSizes = useMemo(
     () =>
@@ -92,6 +97,50 @@ export default function catalog() {
   const onChangeSortOption = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value
     if (isSortItem(value)) {
+      if (value === sortItems.popularity) {
+        setCatalogItems((prev) => prev.sort((i, j) => i.articul - j.articul))
+      }
+      if (value === sortItems.alphabet) {
+        setCatalogItems((prev) =>
+          prev.sort((i, j) => i.title.localeCompare(j.title))
+        )
+      }
+      if (value === sortItems.topPrice || value === sortItems.bottomPrice) {
+        setCatalogItems((prev) => {
+          const sortedArray = prev.sort((i, j) => {
+            if (i.priceWithDiscount && j.priceWithDiscount) {
+              return i.priceWithDiscount - j.priceWithDiscount
+            } else if (i.priceWithDiscount && !j.priceWithDiscount) {
+              return i.priceWithDiscount - j.price
+            } else if (!i.priceWithDiscount && j.priceWithDiscount) {
+              return i.price - j.priceWithDiscount
+            } else {
+              return i.price - j.price
+            }
+          })
+
+          return value === sortItems.topPrice
+            ? sortedArray
+            : sortedArray.reverse()
+        })
+      }
+
+      if (value === sortItems.bottomPrice) {
+        setCatalogItems((prev) =>
+          prev.sort((i, j) => {
+            if (j.priceWithDiscount && i.priceWithDiscount) {
+              return j.priceWithDiscount - i.priceWithDiscount
+            } else if (j.priceWithDiscount && !i.priceWithDiscount) {
+              return j.priceWithDiscount - i.price
+            } else if (!j.priceWithDiscount && i.priceWithDiscount) {
+              return j.price - i.priceWithDiscount
+            } else {
+              return j.price - i.price
+            }
+          })
+        )
+      }
+
       setSortOption(value)
     }
   }
@@ -141,7 +190,9 @@ export default function catalog() {
       : ''
 
     getItems(queryParam).then((data) => {
-      setCatalogItems(data)
+      setCatalogItems(data.sort((i, j) => i.articul - j.articul))
+
+      setSortOption(sortItems.popularity)
     })
   }, [
     filterPriceFrom,
