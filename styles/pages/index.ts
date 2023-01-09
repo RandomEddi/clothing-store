@@ -15,3 +15,6 @@ export { CatalogPageStyles }
 
 import CatalogItemPageStyles from './CatalogItemPage.module.scss'
 export { CatalogItemPageStyles }
+
+import CatalogPageItemStyles from './CatalogPageItem.module.scss'
+export { CatalogPageItemStyles }

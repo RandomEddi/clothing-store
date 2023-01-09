@@ -1,10 +1,11 @@
 import React, { FC, useState } from 'react'
 import { IItem, ItemColorObject, ItemColorType } from 'types'
-import { CatalogPageItemStyles as styles } from 'styles'
+import { CatalogPageItemStyles as styles } from 'styles/pages'
 import { Button, buttonType, CarouselApp } from 'components/ui'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'hooks'
-import { cartActions } from 'store//slices'
+import { cartActions, favouritesActions } from 'store//slices'
 
 export const CatalogPageItem: FC<IItem> = (props) => {
   const {
@@ -21,6 +22,11 @@ export const CatalogPageItem: FC<IItem> = (props) => {
   } = props
   const dispatch = useAppDispatch()
   const [selectedSize, setSelectedSize] = useState<number | null>(null)
+  const favouritesItems = useAppSelector(
+    (state) => state.favouritesReducer.items
+  )
+
+  const isFavouriteActive = !!favouritesItems.find((i) => i.id === id)
 
   const isItemInCart = !!useAppSelector(
     (state) => state.cartReducer.items
@@ -31,6 +37,12 @@ export const CatalogPageItem: FC<IItem> = (props) => {
       setSelectedSize(null)
     } else {
       setSelectedSize(size)
+    }
+  }
+
+  const onAddToFavourite = () => {
+    if (!isFavouriteActive) {
+      dispatch(favouritesActions.addToFavourites(props))
     }
   }
 
@@ -98,6 +110,23 @@ export const CatalogPageItem: FC<IItem> = (props) => {
           >
             {isItemInCart ? 'в корзине' : 'добавить в корзину'}
           </Button>
+          <button onClick={onAddToFavourite} className={styles.toFavourite}>
+            {isFavouriteActive ? (
+              <Image
+                height={20}
+                width={18}
+                src='/favourite-active.svg'
+                alt='favourite svg'
+              />
+            ) : (
+              <Image
+                height={20}
+                width={18}
+                src='/favourite-itemPage.svg'
+                alt='favourite svg'
+              />
+            )}
+          </button>
         </div>
         <div className={styles.catalogItemStructure}>
           <p className={styles.structureTitle}>Состав ткани</p>

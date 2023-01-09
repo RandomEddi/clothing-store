@@ -9,6 +9,3 @@ export { FooterStyles }
 
 import HeaderStyles from './Header.module.scss'
 export { HeaderStyles }
-
-import CatalogPageItemStyles from './CatalogPageItem.module.scss'
-export { CatalogPageItemStyles }
