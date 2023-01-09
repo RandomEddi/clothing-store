@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, MouseEvent, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { cartActions, favouritesActions } from 'store//slices'
@@ -28,7 +28,11 @@ export const CatalogItem: FC<IItem & IPhotoSettings> = React.memo((props) => {
   )
   const isFavouriteActive = !!favouritesItems.find((i) => i.id === id)
 
-  const chooseSizeHandler = (size: number) => {
+  const chooseSizeHandler = (
+    e: MouseEvent<HTMLButtonElement>,
+    size: number
+  ) => {
+    e.preventDefault()
     if (size === selectedSize) {
       setSelectedSize(null)
     } else {
@@ -44,7 +48,8 @@ export const CatalogItem: FC<IItem & IPhotoSettings> = React.memo((props) => {
     setItemIsFocused(false)
   }
 
-  const onAddToCartHandler = () => {
+  const onAddToCartHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     if (!sizes || selectedSize) {
       dispatch(
         cartActions.addToCart({
@@ -60,7 +65,8 @@ export const CatalogItem: FC<IItem & IPhotoSettings> = React.memo((props) => {
     }
   }
 
-  const addToFavouriteHandler = () => {
+  const addToFavouriteHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     if (!isFavouriteActive) {
       dispatch(favouritesActions.addToFavourites(props))
     } else {
@@ -122,12 +128,12 @@ export const CatalogItem: FC<IItem & IPhotoSettings> = React.memo((props) => {
                 )}
               </button>
             </div>
-            <div className={styles.itemToCart}>
+            <div onClick={(e) => e.preventDefault()} className={styles.itemToCart}>
               <div className={styles.itemSizes}>
                 {sizes?.map((size) => (
                   <button
                     key={size}
-                    onClick={() => chooseSizeHandler(size)}
+                    onClick={(e) => chooseSizeHandler(e, size)}
                     className={`${styles.itemSize}${
                       selectedSize === size ? ` ${styles.activeSize}` : ''
                     }`}
