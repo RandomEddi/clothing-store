@@ -1,23 +1,24 @@
 import { appApiInstance } from 'api'
-import { AppDispatch } from 'store'
-import { itemsActions } from 'store//slices'
-import { IItem, ErrorResponse } from 'types'
+import { IItem, ErrorResponse, ICatalogQueryParams } from 'types'
 
-export const getItems = (dispatch: AppDispatch) => async () => {
-  appApiInstance
-    .get<IItem[] | ErrorResponse>('/catalog')
-    .then((resp) => resp.data)
-    .then((data) => {
-      if (Array.isArray(data)) {
-        dispatch(itemsActions.updateItems(data))
-      } else {
-        console.log(data.message)
-      }
-    })
-    .catch((e) => {
-      const error = e as ErrorResponse
-      console.log(error.message)
-    })
+export const getItems = async (
+  params: ICatalogQueryParams = {}
+): Promise<IItem[]> => {
+  try {
+    const { data } = await appApiInstance.get<IItem[] | ErrorResponse>(
+      `/catalog`,
+      { params }
+    )
+    if (Array.isArray(data)) {
+      return data
+    } else {
+      throw Error(data.message)
+    }
+  } catch (e) {
+    const error = e as ErrorResponse
+    console.log(error.message)
+  }
+  return []
 }
 
 export const getCertainItem = async (id: string) => {

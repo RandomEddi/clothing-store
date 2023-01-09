@@ -1,51 +1,61 @@
-import React, { useState, ChangeEvent, useRef } from 'react'
+import React, { useState, ChangeEvent, useEffect, useMemo } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Button, buttonType, PagePath, SortCheckFilter } from 'components/ui'
+import {
+  Button,
+  buttonType,
+  CatalogItem,
+  PagePath,
+  SortCheckFilter
+} from 'components/ui'
 import { CatalogPageStyles as styles } from 'styles/pages'
-import { sortItems, isSortItem, ICheckBox } from 'types'
+import {
+  sortItems,
+  isSortItem,
+  ICheckBox,
+  IItem,
+  ItemCategoryObject,
+  ItemCategoryType,
+  ItemColorObject,
+  ItemColorType,
+  ItemSizeType,
+  ItemSizeObject,
+  ICatalogQueryParams
+} from 'types'
+import { getItems } from 'api/items'
 
-type PriceType = '' | number
-interface IPriceFilter {
-  to: PriceType
-  from: PriceType
-}
+const DUMMY_CATEGORY_CHECKBOXES: ICheckBox[] = Object.keys(
+  ItemCategoryObject
+).map((i) => {
+  return {
+    title: ItemCategoryObject[i as ItemCategoryType],
+    isChecked: false,
+    param: i as ItemCategoryType
+  }
+})
 
-const DUMMY_CATEGORY_CHECKBOXES: ICheckBox[] = [
-  { title: 'Платья', isChecked: false },
-  { title: 'Юбки', isChecked: false },
-  { title: 'Блузки', isChecked: false },
-  { title: 'Футболки, топы', isChecked: false },
-  { title: 'Худи, свитшоты', isChecked: false },
-  { title: 'Жакеты, жилеты', isChecked: false },
-  { title: 'Брюки, шорты', isChecked: false },
-  { title: 'Джинсы', isChecked: false },
-  { title: 'Комбинезоны', isChecked: false },
-  { title: 'Спортивные костюмы', isChecked: false },
-  { title: 'Пальто, плащи, куртки', isChecked: false }
-]
+const DUMMY_COLOR_CHECKBOXES: ICheckBox[] = Object.keys(ItemColorObject).map(
+  (i) => {
+    return {
+      title: ItemColorObject[i as ItemColorType],
+      isChecked: false,
+      param: i as ItemColorType
+    }
+  }
+)
 
-const DUMMY_COLOR_CHECKBOXES: ICheckBox[] = [
-  { title: 'Белый', isChecked: false },
-  { title: 'Черный', isChecked: false },
-  { title: 'Красный', isChecked: false },
-  { title: 'Бежевый', isChecked: false },
-  { title: 'Синий', isChecked: false },
-  { title: 'Зеленый', isChecked: false },
-  { title: 'Принты', isChecked: false }
-]
-
-const DUMMY_SIZES_CHECKBOXES: ICheckBox[] = [
-  { title: '38 (XXS)', isChecked: false },
-  { title: '40 (XS)', isChecked: false },
-  { title: '42 (S)', isChecked: false },
-  { title: '44 (M)', isChecked: false },
-  { title: '46 (L)', isChecked: false },
-  { title: '48 (XL)', isChecked: false },
-  { title: '50 (XXL)', isChecked: false }
-]
+const DUMMY_SIZES_CHECKBOXES: ICheckBox[] = Object.keys(ItemSizeObject).map(
+  (i) => {
+    return {
+      title: ItemSizeObject[i as ItemSizeType],
+      isChecked: false,
+      param: i as ItemSizeType
+    }
+  }
+)
 
 export default function catalog() {
+  const [catalogItems, setCatalogItems] = useState<IItem[]>([])
   const [sortOption, setSortOption] = useState<sortItems>(sortItems.popularity)
   const [categoryCheckBoxes, setCategoryCheckBoxes] = useState<ICheckBox[]>(
     DUMMY_CATEGORY_CHECKBOXES
@@ -56,8 +66,28 @@ export default function catalog() {
   const [sizesCheckBoxes, setSizesCheckBoxes] = useState<ICheckBox[]>(
     DUMMY_SIZES_CHECKBOXES
   )
-  const filterPriceFrom = useRef<HTMLInputElement>(null)
-  const filterPriceTo = useRef<HTMLInputElement>(null)
+  const [filterPriceFrom, setFilterPriceFrom] = useState<number | ''>('')
+  const [filterPriceTo, setFilterPriceTo] = useState<number | ''>('')
+
+  const arrayOfCheckedCategoryes = useMemo(
+    () =>
+      categoryCheckBoxes
+        .map((i) => (i.isChecked ? i.param : ''))
+        .filter((i) => (i ? i : '')),
+    [categoryCheckBoxes]
+  )
+
+  const arrayOfCheckedColors = useMemo(() => colorCheckBoxes
+    .map((i) => (i.isChecked ? i.param : ''))
+    .filter((i) => (i ? i : '')), [colorCheckBoxes])
+
+  const arrayOfCheckedSizes = useMemo(
+    () =>
+      sizesCheckBoxes
+        .map((i) => (i.isChecked ? i.param : ''))
+        .filter((i) => (i ? i : '')),
+    [sizesCheckBoxes]
+  )
 
   const onChangeSortOption = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value
@@ -72,13 +102,54 @@ export default function catalog() {
     )
     setColorCheckBoxes((prev) => prev.map((i) => ({ ...i, isChecked: false })))
     setSizesCheckBoxes((prev) => prev.map((i) => ({ ...i, isChecked: false })))
-    if (filterPriceFrom.current) {
-      filterPriceFrom.current.value = ''
-    }
-    if (filterPriceTo.current) {
-      filterPriceTo.current.value = ''
+    setFilterPriceFrom('')
+    setFilterPriceTo('')
+  }
+
+  const onChangePriceFrom = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    if (value) {
+      setFilterPriceFrom(+value)
+    } else {
+      setFilterPriceFrom('')
     }
   }
+
+  const onChangePriceTo = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    if (value) {
+      setFilterPriceTo(+value)
+    } else {
+      setFilterPriceTo('')
+    }
+  }
+
+  useEffect(() => {
+    const queryParam: ICatalogQueryParams = {}
+    filterPriceFrom ? (queryParam.priceFrom = filterPriceFrom.toString()) : ''
+
+    filterPriceTo ? (queryParam.priceTo = filterPriceTo.toString()) : ''
+
+    arrayOfCheckedCategoryes.length
+      ? (queryParam.category = arrayOfCheckedCategoryes.join(','))
+      : ''
+    arrayOfCheckedColors.length
+      ? (queryParam.color = arrayOfCheckedColors.join(','))
+      : ''
+    arrayOfCheckedSizes.length
+      ? (queryParam.size = arrayOfCheckedSizes.join(','))
+      : ''
+
+    getItems(queryParam).then((data) => {
+      setCatalogItems(data)
+    })
+  }, [
+    filterPriceFrom,
+    filterPriceTo,
+    arrayOfCheckedCategoryes,
+    arrayOfCheckedColors,
+    arrayOfCheckedSizes
+  ])
 
   return (
     <>
@@ -134,17 +205,19 @@ export default function catalog() {
               <div className={styles.priceFilter}>
                 <span>ОТ</span>
                 <input
+                  onChange={onChangePriceFrom}
                   type='number'
                   data-type='from'
                   placeholder='999'
-                  ref={filterPriceFrom}
+                  value={filterPriceFrom}
                 />
                 <span>ДО</span>
                 <input
+                  onChange={onChangePriceTo}
                   type='number'
                   data-type='to'
                   placeholder='20000'
-                  ref={filterPriceTo}
+                  value={filterPriceTo}
                 />
               </div>
             </div>
@@ -152,7 +225,11 @@ export default function catalog() {
               Очистить фильтр
             </Button>
           </div>
-          <div className={styles.catalogItems}></div>
+          <div className={styles.catalogItems}>
+            {catalogItems.map((item) => (
+              <CatalogItem key={item.id} height={420} width={297} {...item} />
+            ))}
+          </div>
         </div>
       </div>
     </>

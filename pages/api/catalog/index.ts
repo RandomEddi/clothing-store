@@ -6,27 +6,52 @@ import axios from 'axios'
 type ResponseType = Record<string, IItem>
 
 export default async function handler(
-  _req: NextApiRequest,
+  req: NextApiRequest,
   res: NextApiResponse<IItem[] | ErrorResponse>
 ) {
   try {
     const { data } = await axios.get<ResponseType>(`${FIREBASE_URL}/items.json`)
+    let responseArray: IItem[] = []
 
-    const responseArray: IItem[] = []
+    const {
+      category: queryCategory,
+      size: querySize,
+      color: queryColor,
+      priceFrom: queryPriceFrom,
+      priceTo: queryPriceTo
+    } = req.query
 
     for (const item of Object.keys(data)) {
       responseArray.push({
-        articul: data[item].articul,
-        category: data[item].category,
-        color: data[item].color,
-        img: data[item].img,
-        price: data[item].price,
-        sizes: data[item].sizes,
-        structure: data[item].structure,
-        title: data[item].title,
-        priceWithDiscount: data[item].priceWithDiscount,
+        ...data[item],
         id: item
       })
+    }
+
+    if (queryCategory && !Array.isArray(queryCategory)) {
+      responseArray = responseArray.filter((i) =>
+        queryCategory.split(',').includes(i.category)
+      )
+    }
+
+    // if (querySize && !Array.isArray(querySize)) {
+    //   responseArray = responseArray.filter((i) =>
+    //     querySize.split(',').includes(i.sizes)
+    //   )
+    // }
+
+    if (queryColor && !Array.isArray(queryColor)) {
+      responseArray = responseArray.filter((i) =>
+        queryColor.split(',').includes(i.color)
+      )
+    }
+
+    if (queryPriceFrom && !Array.isArray(queryPriceFrom)) {
+      responseArray = responseArray.filter((i) => +queryPriceFrom <= i.price)
+    }
+
+    if (queryPriceTo && !Array.isArray(queryPriceTo)) {
+      responseArray = responseArray.filter((i) => +queryPriceTo >= i.price)
     }
 
     res.status(200).json(responseArray)

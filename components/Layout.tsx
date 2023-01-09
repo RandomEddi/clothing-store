@@ -3,6 +3,7 @@ import { Footer, Header, Cart, Favourites } from 'components'
 import { Notification } from './ui'
 import { useAppDispatch } from 'hooks'
 import { getItems } from 'api'
+import { itemsActions } from 'store//slices'
 
 interface Props {
   children: React.ReactNode
@@ -11,7 +12,7 @@ interface Props {
 export const Layout: FC<Props> = React.memo(({ children }: Props) => {
   const dispatch = useAppDispatch()
   useEffect(() => {
-    getItems(dispatch)()
+    getItems().then((data) => dispatch(itemsActions.updateItems(data)))
   }, [])
 
   return (

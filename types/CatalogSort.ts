@@ -1,3 +1,5 @@
+import { ItemCategoryType, ItemColorType, ItemSizeType } from 'types'
+
 export enum sortItems {
   popularity = 'popularity',
   alphabet = 'alphabet',
@@ -17,4 +19,5 @@ export const isSortItem = (item: string): item is sortItems => {
 export interface ICheckBox {
   title: string
   isChecked: boolean
+  param: ItemCategoryType | ItemColorType | ItemSizeType
 }

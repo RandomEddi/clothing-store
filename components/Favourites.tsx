@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { FavouritesItem } from './ui/FavouritesItem'
 
 export const Favourites: FC = () => {
-  const favouritesCtx = useAppSelector((state) => state.favourites)
+  const favouritesCtx = useAppSelector((state) => state.favouritesReducer)
   const dispatch = useAppDispatch()
 
   const toggleFavouritesHandler = () => {

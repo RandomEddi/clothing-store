@@ -6,7 +6,9 @@ import Link from 'next/link'
 import { Button, PagePath } from 'components/ui'
 
 const favourites: FC = () => {
-  const favouritesItems = useAppSelector((state) => state.favourites.items)
+  const favouritesItems = useAppSelector(
+    (state) => state.favouritesReducer.items
+  )
   return (
     <>
       <div className={`${styles.favouritesPage} container`}>

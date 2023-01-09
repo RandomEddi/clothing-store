@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 export default function Home() {
   const [isCatalogFull, setIsCatalogFull] = useState<boolean>(false)
-  const catalogItems = useAppSelector((state) => state.items.items)
+  const catalogItems = useAppSelector((state) => state.itemsReducer.items)
   const { width } = useWindowSize()
   const styleToItems = width
     ? { justifyContent: width <= 991 ? 'center' : '' }

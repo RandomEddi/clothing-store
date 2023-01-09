@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { IItem } from 'types/Item'
+import { IItem } from 'types'
 import { CatalogPageItemStyles as styles } from 'styles'
 import { Button, buttonType, CarouselApp } from 'components/ui'
 import Link from 'next/link'

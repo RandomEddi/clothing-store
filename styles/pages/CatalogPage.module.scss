@@ -29,8 +29,16 @@
   }
   .catalog {
     margin-top: 45px;
+    display: flex;
+    justify-content: space-between;
     .catalogFilters {
       margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      margin-right: 79px;
+      & > button {
+        font-size: var(--fontSizeLittle);
+      }
       .categoryFilter {
         margin-top: 40px;
       }
@@ -53,6 +61,7 @@
           input {
             margin-right: 10px;
             outline: 0;
+            max-width: 70px;
             border: 1px solid $footer;
             &::-webkit-outer-spin-button,
             &::-webkit-inner-spin-button {
@@ -88,6 +97,13 @@
         flex-direction: column;
         row-gap: 10px;
       }
+    }
+    .catalogItems {
+      display: grid;
+      grid-template-columns: 297px 297px 297px;
+      gap: 30px;
+      justify-content: space-between;
+      margin-bottom: 100px;
     }
   }
 }

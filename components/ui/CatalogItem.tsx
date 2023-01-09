@@ -23,7 +23,9 @@ export const CatalogItem: FC<IItem & IPhotoSettings> = React.memo((props) => {
   const dispatch = useAppDispatch()
   const [selectedSize, setSelectedSize] = useState<number | null>(null)
   const [itemIsFocused, setItemIsFocused] = useState<boolean>(false)
-  const favouritesItems = useAppSelector((state) => state.favourites.items)
+  const favouritesItems = useAppSelector(
+    (state) => state.favouritesReducer.items
+  )
   const isFavouriteActive = !!favouritesItems.find((i) => i.id === id)
 
   const chooseSizeHandler = (size: number) => {

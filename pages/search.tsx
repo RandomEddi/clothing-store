@@ -10,7 +10,7 @@ import { SearchPageStyles as styles } from 'styles/pages'
 const search: FC = () => {
   const router = useRouter()
   const searchQuery = router.query.query
-  const items = useAppSelector((state) => state.items.items)
+  const items = useAppSelector((state) => state.itemsReducer.items)
   const itemsBySearch = items.filter((i) => {
     if (
       !Array.isArray(searchQuery) &&

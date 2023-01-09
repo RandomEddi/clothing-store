@@ -4,7 +4,7 @@ import { getCertainItem } from 'api'
 import { useAppSelector } from 'hooks'
 import { CatalogPageItem } from 'components'
 import { CatalogItem, PagePath } from 'components/ui'
-import { IItem, EnumItemCategoryObject } from 'types'
+import { IItem, ItemCategoryObject } from 'types'
 import styles from 'styles/pages/CatalogItemPage.module.scss'
 import { shuffleArray } from 'utils/shuffleArray'
 
@@ -14,7 +14,7 @@ const CatalogItemPage: FC = () => {
   const { id } = router.query
   const itemCategory = currentItem?.category
   const mayLikeItems = shuffleArray(
-    useAppSelector((state) => state.items.items).filter(
+    useAppSelector((state) => state.itemsReducer.items).filter(
       (i) => i.category === currentItem?.category && i.id !== currentItem.id
     )
   )
@@ -43,7 +43,7 @@ const CatalogItemPage: FC = () => {
           <div className={styles.path}>
             <PagePath
               section='Каталог'
-              category={EnumItemCategoryObject[itemCategory]}
+              category={ItemCategoryObject[itemCategory]}
               title={currentItem.title}
             />
           </div>
