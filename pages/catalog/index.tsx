@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useEffect, useMemo } from 'react'
+import React, { useState, ChangeEvent, useEffect, useMemo, useRef } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import {
@@ -71,6 +71,8 @@ export default function catalog() {
   const [filterPriceTo, setFilterPriceTo] = useState<number | ''>('')
   const [catalogItemsIsLoading, setCatalogItemsIsLoading] =
     useState<boolean>(false)
+  let isFirstRender = useRef<boolean>(true)
+
   const arrayOfCheckedCategoryes = useMemo(
     () =>
       categoryCheckBoxes
@@ -175,30 +177,43 @@ export default function catalog() {
   }
 
   useEffect(() => {
-    const queryParam: ICatalogQueryParams = {}
-    filterPriceFrom ? (queryParam.priceFrom = filterPriceFrom.toString()) : ''
+    const timer = setTimeout(
+      () => {
+        const queryParam: ICatalogQueryParams = {}
+        filterPriceFrom
+          ? (queryParam.priceFrom = filterPriceFrom.toString())
+          : ''
 
-    filterPriceTo ? (queryParam.priceTo = filterPriceTo.toString()) : ''
+        filterPriceTo ? (queryParam.priceTo = filterPriceTo.toString()) : ''
 
-    arrayOfCheckedCategoryes.length
-      ? (queryParam.category = arrayOfCheckedCategoryes.join(','))
-      : ''
-    arrayOfCheckedColors.length
-      ? (queryParam.color = arrayOfCheckedColors.join(','))
-      : ''
-    arrayOfCheckedSizes.length
-      ? (queryParam.size = arrayOfCheckedSizes.join(','))
-      : ''
-    setCatalogItemsIsLoading(true)
+        arrayOfCheckedCategoryes.length
+          ? (queryParam.category = arrayOfCheckedCategoryes.join(','))
+          : ''
+        arrayOfCheckedColors.length
+          ? (queryParam.color = arrayOfCheckedColors.join(','))
+          : ''
+        arrayOfCheckedSizes.length
+          ? (queryParam.size = arrayOfCheckedSizes.join(','))
+          : ''
+        setCatalogItemsIsLoading(true)
 
-    getItems(queryParam)
-      .then((data) => {
-        setCatalogItems(data.sort((i, j) => i.articul - j.articul))
-        setSortOption(sortItems.popularity)
-      })
-      .finally(() => {
-        setCatalogItemsIsLoading(false)
-      })
+        getItems(queryParam)
+          .then((data) => {
+            setCatalogItems(data.sort((i, j) => i.articul - j.articul))
+            setSortOption(sortItems.popularity)
+          })
+          .finally(() => {
+            setCatalogItemsIsLoading(false)
+          })
+      },
+      isFirstRender.current ? 0 : 777
+    )
+
+    isFirstRender.current = false
+
+    return () => {
+      clearTimeout(timer)
+    }
   }, [
     filterPriceFrom,
     filterPriceTo,
@@ -297,10 +312,12 @@ export default function catalog() {
                   />
                 ))}
               </div>
-            ) : (
+            ) : !catalogItemsIsLoading ? (
               <div className={styles.emptyCatalog}>
                 <p>Не нашли одежду по запросу</p>
               </div>
+            ) : (
+              ''
             )}
           </div>
           {catalogItemsIsLoading && (
