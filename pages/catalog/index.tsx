@@ -5,10 +5,11 @@ import {
   Button,
   buttonType,
   CatalogItem,
+  Loading,
   PagePath,
   SortCheckFilter
 } from 'components/ui'
-import { CatalogPageStyles as styles } from 'styles/pages'
+import { getItems } from 'api/items'
 import {
   sortItems,
   isSortItem,
@@ -22,8 +23,7 @@ import {
   ItemSizeObject,
   ICatalogQueryParams
 } from 'types'
-import { getItems } from 'api/items'
-import { shuffleArray } from 'utils/shuffleArray'
+import { CatalogPageStyles as styles } from 'styles/pages'
 
 const DUMMY_CATEGORY_CHECKBOXES: ICheckBox[] = Object.keys(
   ItemCategoryObject
@@ -69,7 +69,8 @@ export default function catalog() {
   )
   const [filterPriceFrom, setFilterPriceFrom] = useState<number | ''>('')
   const [filterPriceTo, setFilterPriceTo] = useState<number | ''>('')
-
+  const [catalogItemsIsLoading, setCatalogItemsIsLoading] =
+    useState<boolean>(false)
   const arrayOfCheckedCategoryes = useMemo(
     () =>
       categoryCheckBoxes
@@ -188,12 +189,16 @@ export default function catalog() {
     arrayOfCheckedSizes.length
       ? (queryParam.size = arrayOfCheckedSizes.join(','))
       : ''
+    setCatalogItemsIsLoading(true)
 
-    getItems(queryParam).then((data) => {
-      setCatalogItems(data.sort((i, j) => i.articul - j.articul))
-
-      setSortOption(sortItems.popularity)
-    })
+    getItems(queryParam)
+      .then((data) => {
+        setCatalogItems(data.sort((i, j) => i.articul - j.articul))
+        setSortOption(sortItems.popularity)
+      })
+      .finally(() => {
+        setCatalogItemsIsLoading(false)
+      })
   }, [
     filterPriceFrom,
     filterPriceTo,
@@ -208,83 +213,99 @@ export default function catalog() {
         <title>LOYLEN Catalog</title>
         <meta name='description' content='clothes catalog LOYLEN' />
       </Head>
-      <div className={`${styles.catalogPage} container`}>
+      <div className={styles.catalogPage}>
         <h3 className={styles.pageHeader}>Каталог</h3>
-        <div className={styles.catalogSort}>
-          <div>
-            <PagePath section='Каталог' />
+        <div className={`${styles.catalogWrapper} container`}>
+          <div className={styles.catalogSort}>
+            <div>
+              <PagePath section='Каталог' />
+            </div>
+            <div className={styles.sort}>
+              <span>Сортировка</span>
+              <select onChange={onChangeSortOption} value={sortOption}>
+                <option value={sortItems.popularity}>По популярности</option>
+                <option value={sortItems.alphabet}>По алфавиту</option>
+                <option value={sortItems.bottomPrice}>
+                  По цене (Убывание)
+                </option>
+                <option value={sortItems.topPrice}>
+                  По цене (Возрастание)
+                </option>
+              </select>
+            </div>
           </div>
-          <div className={styles.sort}>
-            <span>Сортировка</span>
-            <select onChange={onChangeSortOption} value={sortOption}>
-              <option value={sortItems.popularity}>По популярности</option>
-              <option value={sortItems.alphabet}>По алфавиту</option>
-              <option value={sortItems.bottomPrice}>По цене (Убывание)</option>
-              <option value={sortItems.topPrice}>По цене (Возрастание)</option>
-            </select>
-          </div>
-        </div>
-        <div className={styles.catalog}>
-          <div className={styles.catalogFilters}>
-            <div className={styles.links}>
-              <Link href={'/catalog'}>Все категории</Link>
-              <Link href={'/catalog/news'}>Новинки</Link>
-              <Link href={'/catalog/sale'}>Распродажа</Link>
-            </div>
-            <div className={styles.categoryFilter}>
-              <SortCheckFilter
-                checkboxes={categoryCheckBoxes}
-                onChangeCheckBoxes={setCategoryCheckBoxes}
-              />
-            </div>
-            <div className={styles.filter}>
-              <span>Цвет</span>
-              <SortCheckFilter
-                checkboxes={colorCheckBoxes}
-                onChangeCheckBoxes={setColorCheckBoxes}
-              />
-            </div>
-            <div className={styles.filter}>
-              <span>Размер</span>
-              <SortCheckFilter
-                checkboxes={sizesCheckBoxes}
-                onChangeCheckBoxes={setSizesCheckBoxes}
-              />
-            </div>
-            <div className={styles.filter}>
-              <span>Цена</span>
-              <div className={styles.priceFilter}>
-                <span>ОТ</span>
-                <input
-                  onChange={onChangePriceFrom}
-                  type='number'
-                  data-type='from'
-                  placeholder='999'
-                  value={filterPriceFrom}
-                />
-                <span>ДО</span>
-                <input
-                  onChange={onChangePriceTo}
-                  type='number'
-                  data-type='to'
-                  placeholder='20000'
-                  value={filterPriceTo}
+          <div className={styles.catalog}>
+            <div className={styles.catalogFilters}>
+              <div className={styles.links}>
+                <Link href={'/catalog'}>Все категории</Link>
+                <Link href={'/catalog/news'}>Новинки</Link>
+                <Link href={'/catalog/sale'}>Распродажа</Link>
+              </div>
+              <div className={styles.categoryFilter}>
+                <SortCheckFilter
+                  checkboxes={categoryCheckBoxes}
+                  onChangeCheckBoxes={setCategoryCheckBoxes}
                 />
               </div>
+              <div className={styles.filter}>
+                <span>Цвет</span>
+                <SortCheckFilter
+                  checkboxes={colorCheckBoxes}
+                  onChangeCheckBoxes={setColorCheckBoxes}
+                />
+              </div>
+              <div className={styles.filter}>
+                <span>Размер</span>
+                <SortCheckFilter
+                  checkboxes={sizesCheckBoxes}
+                  onChangeCheckBoxes={setSizesCheckBoxes}
+                />
+              </div>
+              <div className={styles.filter}>
+                <span>Цена</span>
+                <div className={styles.priceFilter}>
+                  <span>ОТ</span>
+                  <input
+                    onChange={onChangePriceFrom}
+                    type='number'
+                    data-type='from'
+                    placeholder='999'
+                    value={filterPriceFrom}
+                  />
+                  <span>ДО</span>
+                  <input
+                    onChange={onChangePriceTo}
+                    type='number'
+                    data-type='to'
+                    placeholder='20000'
+                    value={filterPriceTo}
+                  />
+                </div>
+              </div>
+              <Button clickHandler={onClearFilter} type={buttonType.gray}>
+                Очистить фильтр
+              </Button>
             </div>
-            <Button clickHandler={onClearFilter} type={buttonType.gray}>
-              Очистить фильтр
-            </Button>
+            {catalogItems.length > 0 ? (
+              <div className={styles.catalogItems}>
+                {catalogItems.map((item) => (
+                  <CatalogItem
+                    key={item.id}
+                    height={420}
+                    width={297}
+                    {...item}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.emptyCatalog}>
+                <p>Не нашли одежду по запросу</p>
+              </div>
+            )}
           </div>
-          {catalogItems.length > 0 ? (
-            <div className={styles.catalogItems}>
-              {catalogItems.map((item) => (
-                <CatalogItem key={item.id} height={420} width={297} {...item} />
-              ))}
-            </div>
-          ) : (
-            <div className={styles.emptyCatalog}>
-              <p>Не нашли одежду по запросу</p>
+          {catalogItemsIsLoading && (
+            <div className={styles.loading}>
+              <Loading />
             </div>
           )}
         </div>

@@ -1,7 +1,9 @@
 @import '../variables.scss';
 
 .catalogPage {
-  margin-top: 50px;
+  padding-top: 50px;
+  position: relative;
+
   .pageHeader {
     text-align: center;
     margin-bottom: 30px;
@@ -111,5 +113,14 @@
       font-size: var(--fontSizeBig);
       color: $mainColor;
     }
+  }
+  .loading {
+    z-index: 99999;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    padding-top: 135px;
+    justify-content: center;
+    background: rgba(71, 74, 81, 0.3);
   }
 }

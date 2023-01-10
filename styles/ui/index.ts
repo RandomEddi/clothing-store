@@ -27,3 +27,6 @@ export { PagePathStyles }
 
 import SortCheckFilterStyles from './SortCheckFilter.module.scss'
 export { SortCheckFilterStyles }
+
+import LoadingStyles from './Loading.module.scss'
+export { LoadingStyles }
