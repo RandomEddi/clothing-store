@@ -105,5 +105,11 @@
       justify-content: space-between;
       margin-bottom: 100px;
     }
+    .emptyCatalog {
+      text-align: center;
+      width: 100%;
+      font-size: var(--fontSizeBig);
+      color: $mainColor;
+    }
   }
 }

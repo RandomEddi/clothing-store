@@ -276,11 +276,17 @@ export default function catalog() {
               Очистить фильтр
             </Button>
           </div>
-          <div className={styles.catalogItems}>
-            {catalogItems.map((item) => (
-              <CatalogItem key={item.id} height={420} width={297} {...item} />
-            ))}
-          </div>
+          {catalogItems.length > 0 ? (
+            <div className={styles.catalogItems}>
+              {catalogItems.map((item) => (
+                <CatalogItem key={item.id} height={420} width={297} {...item} />
+              ))}
+            </div>
+          ) : (
+            <div className={styles.emptyCatalog}>
+              <p>Не нашли одежду по запросу</p>
+            </div>
+          )}
         </div>
       </div>
     </>
