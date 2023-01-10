@@ -71,7 +71,7 @@
               margin: 0;
             }
             &[type='number'] {
-              -moz-appearance: textfield;
+              appearance: textfield;
             }
             &::placeholder {
               color: $gray;

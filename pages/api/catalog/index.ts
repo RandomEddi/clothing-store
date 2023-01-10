@@ -47,11 +47,23 @@ export default async function handler(
     }
 
     if (queryPriceFrom && !Array.isArray(queryPriceFrom)) {
-      responseArray = responseArray.filter((i) => +queryPriceFrom <= i.price)
+      responseArray = responseArray.filter((i) => {
+        if (i.priceWithDiscount) {
+          return +queryPriceFrom <= i.priceWithDiscount
+        } else {
+          return +queryPriceFrom <= i.price
+        }
+      })
     }
 
     if (queryPriceTo && !Array.isArray(queryPriceTo)) {
-      responseArray = responseArray.filter((i) => +queryPriceTo >= i.price)
+      responseArray = responseArray.filter((i) => {
+        if (i.priceWithDiscount) {
+          return +queryPriceTo >= i.priceWithDiscount
+        } else {
+          ;+queryPriceTo >= i.price
+        }
+      })
     }
 
     res.status(200).json(responseArray)
