@@ -34,11 +34,12 @@ export default async function handler(
       )
     }
 
-    // if (querySize && !Array.isArray(querySize)) {
-    //   responseArray = responseArray.filter((i) =>
-    //     querySize.split(',').includes(i.sizes)
-    //   )
-    // }
+    if (querySize && !Array.isArray(querySize)) {
+      responseArray = responseArray.filter((i) => {
+        const querySizes = querySize.split(',')
+        return !!querySizes.filter((qSize) => i.sizes?.includes(+qSize)).length
+      })
+    }
 
     if (queryColor && !Array.isArray(queryColor)) {
       responseArray = responseArray.filter((i) =>
@@ -61,7 +62,7 @@ export default async function handler(
         if (i.priceWithDiscount) {
           return +queryPriceTo >= i.priceWithDiscount
         } else {
-          ;+queryPriceTo >= i.price
+          return +queryPriceTo >= i.price
         }
       })
     }
