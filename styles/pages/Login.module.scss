@@ -1,0 +1,33 @@
+@import '../variables.scss';
+
+.loginPage {
+  padding-top: 80px !important;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  .registration,
+  .login {
+    .header {
+      margin-bottom: 30px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: $mainColor;
+      font-size: var(--fontSizeBig);
+    }
+    form {
+      & > div {
+        margin-bottom: 30px;
+      }
+      .checkbox {
+        display: flex;
+        align-items: center;
+        input {
+          margin-right: 16px;
+        }
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

@@ -18,3 +18,6 @@ export { CatalogItemPageStyles }
 
 import CatalogPageItemStyles from './CatalogPageItem.module.scss'
 export { CatalogPageItemStyles }
+
+import LoginPageStyles from './Login.module.scss'
+export { LoginPageStyles }

@@ -3,7 +3,8 @@ import {
   notificationSlice,
   cartSlice,
   itemsSlice,
-  favouritesSlice
+  favouritesSlice,
+  profileSlice
 } from './slices'
 
 export const store = configureStore({
@@ -11,7 +12,8 @@ export const store = configureStore({
     notificationReducer: notificationSlice.reducer,
     cartReducer: cartSlice.reducer,
     itemsReducer: itemsSlice.reducer,
-    favouritesReducer: favouritesSlice.reducer
+    favouritesReducer: favouritesSlice.reducer,
+    profileReducer: profileSlice.reducer
   }
 })
 
