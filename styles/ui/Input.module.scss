@@ -1,0 +1,20 @@
+@import '../variables.scss';
+
+.input {
+  position: relative;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $mainColor;
+  max-width: 407px;
+  input {
+    color: $mainColor;
+    background: initial;
+    border: 0;
+    outline: 0;
+    font-size: var(--fontSizeMedium);
+    &::placeholder {
+      font-size: var(--fontSizeMedium);
+      color: $gray;
+    }
+  }
+
+}

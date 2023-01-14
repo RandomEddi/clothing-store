@@ -1,36 +1,7 @@
 @import '../variables.scss';
 
 .filter {
-  .box {
-    display: flex;
-    input[type='checkbox'] {
-      display: none;
-    }
-    input[type='checkbox'] + label {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 10px;
-      color: $mainColor;
-      cursor: pointer;
-    }
-    input[type='checkbox'] + label:before {
-      content: '';
-      display: block;
-      width: 20px;
-      height: 20px;
-      border: 0.5px solid $mainColor;
-      position: absolute;
-      left: 0;
-      top: 0;
-      background: $white;
-    }
-    input[type='checkbox']:checked + label {
-      text-transform: uppercase;
-    }
-    input[type='checkbox']:checked + label:before {
-      background: $accentColor;
-      box-shadow: inset 0px 0px 0px 4px $white;
-    }
+  input[type='checkbox']:checked + label {
+    text-transform: uppercase;
   }
 }
