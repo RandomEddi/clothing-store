@@ -4,7 +4,6 @@ import { CatalogItem } from 'components'
 import { Button, buttonType } from 'components/ui'
 import { useAppSelector, useWindowSize } from 'hooks'
 import { MainPageStyles as styles } from 'styles/pages'
-import Image from 'next/image'
 
 export default function Home() {
   const [isCatalogFull, setIsCatalogFull] = useState<boolean>(false)

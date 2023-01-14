@@ -5,7 +5,8 @@
     position: relative;
     z-index: 99;
     img {
-      transition: all 0.3s;
+      transition: opacity 0.3s;
+
     }
     .itemPhoto {
       position: absolute;

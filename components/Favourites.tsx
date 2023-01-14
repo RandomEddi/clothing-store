@@ -28,7 +28,7 @@ export const Favourites: FC = () => {
       {favouritesCtx.items.length > 0 ? (
         <div className={styles.favouritesList}>
           {favouritesCtx.items.map((fav) => (
-            <FavouritesItem {...fav} height={285} width={189} />
+            <FavouritesItem {...fav} key={fav.id} height={285} width={189} />
           ))}
         </div>
       ) : (

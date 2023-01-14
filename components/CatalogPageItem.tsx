@@ -43,6 +43,8 @@ export const CatalogPageItem: FC<IItem> = (props) => {
   const onAddToFavourite = () => {
     if (!isFavouriteActive) {
       dispatch(favouritesActions.addToFavourites(props))
+    } else {
+      dispatch(favouritesActions.deleteFromFavourites({ id }))
     }
   }
 

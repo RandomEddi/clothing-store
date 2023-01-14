@@ -10,6 +10,7 @@ import {
   SortCheckFilter
 } from 'components/ui'
 import { getItems } from 'api/items'
+import { useWindowSize } from 'hooks'
 import {
   sortItems,
   isSortItem,
@@ -71,6 +72,7 @@ export default function catalog() {
   const [filterPriceTo, setFilterPriceTo] = useState<number | ''>('')
   const [catalogItemsIsLoading, setCatalogItemsIsLoading] =
     useState<boolean>(false)
+  const { width } = useWindowSize()
   let isFirstRender = useRef<boolean>(true)
 
   const arrayOfCheckedCategoryes = useMemo(
@@ -206,7 +208,7 @@ export default function catalog() {
             setCatalogItemsIsLoading(false)
           })
       },
-      isFirstRender.current ? 0 : 777
+      isFirstRender.current ? 0 : 500
     )
 
     isFirstRender.current = false
@@ -221,6 +223,14 @@ export default function catalog() {
     arrayOfCheckedColors,
     arrayOfCheckedSizes
   ])
+  //TODO: Додедать catalogCssSettings
+
+  const catalogCssSettings: { width: number; height: number; columns: number } =
+    {
+      height: 419,
+      width: width > 1400 ? 297 : width > 320 ? 280 : 250,
+      columns: width > 1400 ? 3 : width > 992 ? 2 : 1
+    }
 
   return (
     <>
@@ -302,12 +312,17 @@ export default function catalog() {
               </Button>
             </div>
             {catalogItems.length > 0 ? (
-              <div className={styles.catalogItems}>
+              <div
+                style={{
+                  gridTemplateColumns: `repeat(${catalogCssSettings.columns}, minmax(0, ${catalogCssSettings.width}px))`
+                }}
+                className={styles.catalogItems}
+              >
                 {catalogItems.map((item) => (
                   <CatalogItem
                     key={item.id}
-                    height={420}
-                    width={297}
+                    height={catalogCssSettings.height}
+                    width={catalogCssSettings.width}
                     {...item}
                   />
                 ))}

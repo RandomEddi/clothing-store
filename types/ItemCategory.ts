@@ -25,13 +25,13 @@ export const ItemColorObject = {
 }
 
 export const ItemSizeObject = {
-  xxs: '38 (XXS)',
-  xs: '40 (XS)',
-  s: '42 (S)',
-  m: '44 (M)',
-  l: '46 (L)',
-  xl: '48 (XL)',
-  xxl: '50 (XXL)'
+  '38': '38 (XXS)',
+  '40': '40 (XS)',
+  '42': '42 (S)',
+  '44': '44 (M)',
+  '46': '46 (L)',
+  '48': '48 (XL)',
+  '50': '50 (XXL)'
 }
 
 export type ItemCategoryType = keyof typeof ItemCategoryObject

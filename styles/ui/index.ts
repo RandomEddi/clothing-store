@@ -30,3 +30,9 @@ export { SortCheckFilterStyles }
 
 import LoadingStyles from './Loading.module.scss'
 export { LoadingStyles }
+
+import InputStyles from './Input.module.scss'
+export { InputStyles }
+
+import CheckBoxStyles from './CheckBox.module.scss'
+export { CheckBoxStyles }
