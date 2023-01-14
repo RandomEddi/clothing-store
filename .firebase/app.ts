@@ -1,17 +1,19 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase } from 'firebase/database'
+import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAojuelR6xl53IafUXbuXllrvJf-Nk7Ass',
-  authDomain: 'clothing-store-ecae0.firebaseapp.com',
-  databaseURL: 'https://clothing-store-ecae0-default-rtdb.firebaseio.com',
-  projectId: 'clothing-store-ecae0',
-  storageBucket: 'clothing-store-ecae0.appspot.com',
-  messagingSenderId: '445821409325',
-  appId: '1:445821409325:web:144f79ed504584538d80a4',
-  measurementId: 'G-Z9XD5FVVW4'
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 }
 
 const app = initializeApp(firebaseConfig)
 
 export const db = getDatabase(app)
+export const auth = getAuth(app)
