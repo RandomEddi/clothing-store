@@ -5,6 +5,9 @@
   padding-bottom: 10px;
   border-bottom: 1px solid $mainColor;
   max-width: 407px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   input {
     color: $mainColor;
     background: initial;

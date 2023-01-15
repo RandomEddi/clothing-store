@@ -71,7 +71,7 @@ export const Registration: FC = () => {
     null
   )
   //TODO: Сделать обработку ошибок
-  
+
   const onRegistrationSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (
@@ -85,7 +85,10 @@ export const Registration: FC = () => {
     ) {
       try {
         setRegistrationError(null)
-        const res = signIn(registrationState.email, registrationState.pass)
+        const res = await signIn(
+          registrationState.email,
+          registrationState.pass
+        )
         if (typeof res === 'string') {
           throw new Error(res)
         }
@@ -100,9 +103,9 @@ export const Registration: FC = () => {
       } catch (e) {
         if (e instanceof Error) {
           setRegistrationError(e.message)
-          console.log('Error:',e.message)
+          console.log('Error:', e.message)
         }
-        console.log('asd');
+        console.log('asd')
       }
     } else {
       console.log('Заполните поля')
@@ -217,7 +220,7 @@ export const Registration: FC = () => {
           </CheckBox>
         </div>
         {registrationError && (
-          <div className={styles.error}>Неправильно заполнена форма</div>
+          <p className={styles.error}>Неправильно заполнена форма</p>
         )}
         <Button type={buttonType.gray}>зарегистрироваться</Button>
       </form>

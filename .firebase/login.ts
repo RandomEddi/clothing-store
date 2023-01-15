@@ -1,5 +1,8 @@
 import { auth } from './app'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from 'firebase/auth'
 import { UserCredential } from 'firebase/auth'
 
 export const signIn = async (
@@ -14,5 +17,21 @@ export const signIn = async (
       return e.message
     }
     return 'Error'
+  }
+}
+
+export const logIn = async (
+  email: string,
+  password: string
+): Promise<UserCredential | string> => {
+  try {
+    const res = await signInWithEmailAndPassword(auth, email, password)
+    return res
+  } catch (e) {
+    let error = 'Erorr'
+    if (e instanceof Error) {
+      error = e.message
+    }
+    return error
   }
 }

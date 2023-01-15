@@ -3,8 +3,10 @@
 .loginPage {
   padding-top: 80px !important;
   display: flex;
-  justify-content: space-between;
   margin-bottom: 80px;
+  .registration {
+    margin-right: 248px;
+  }
   .registration,
   .login {
     .header {
@@ -21,6 +23,7 @@
       .checkbox {
         display: flex;
         align-items: center;
+        margin-bottom: 10px;
         input {
           margin-right: 16px;
         }
@@ -28,6 +31,13 @@
           text-decoration: underline;
         }
       }
+    }
+    .error {
+      margin: 23px 0;
+      color: red;
+      font-size: var(--fontSizeMedium);
+      max-width: 300px;
+      text-align: center;
     }
   }
 }
