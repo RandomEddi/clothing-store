@@ -22,8 +22,6 @@ const CatalogItemPage: FC = () => {
   useEffect(() => {
     if (!id) return
     if (Array.isArray(id)) {
-      console.log(id)
-
       router.push('/404')
     } else {
       getCertainItem(id).then((item) => {

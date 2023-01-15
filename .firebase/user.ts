@@ -1,5 +1,8 @@
 import { db } from './app'
-import { ref, set } from 'firebase/database'
+import { onValue, ref, set } from 'firebase/database'
+import { IProfile } from 'types/Profile'
+import { AppDispatch } from 'store'
+import { profileActions } from 'store//slices'
 
 interface IUser {
   id: string
@@ -9,19 +12,36 @@ interface IUser {
   phone: string
 }
 
-export const createUserInDataBase = async (user: IUser) => {
-  const query = ref(db, 'users')
+export const createUserInDatabase = async (user: IUser) => {
+  const query = ref(db, `users/${user.id}`)
   const profile = {
-    [user.id]: {
-      userData: {
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        phone: user.phone
-      },
-      userAddresses: [],
-      userOrders: []
-    }
+    userData: {
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phone: user.phone
+    },
+    userAddresses: [],
+    userOrders: []
   }
   await set(query, profile)
+}
+
+export const getUserFromDatabase = (uid: string) => (dispatch: AppDispatch) => {
+  try {
+    const query = ref(db, `users/${uid}`)
+    
+    onValue(query, (snapshot) => {
+      setTimeout(async () => {
+        const dataFromDatabase = await snapshot.val()
+        if (snapshot.exists()) {
+          dispatch(profileActions.setUser(dataFromDatabase))
+        }
+      })
+    })
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log(e.message)
+    }
+  }
 }

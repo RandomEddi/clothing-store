@@ -4,6 +4,9 @@ import { Notification } from './ui'
 import { useAppDispatch } from 'hooks'
 import { getItems } from 'api'
 import { itemsActions } from 'store//slices'
+import { auth } from '.firebase/app'
+import { onAuthStateChanged } from 'firebase/auth'
+import { getUserFromDatabase } from '.firebase/user'
 
 interface Props {
   children: React.ReactNode
@@ -13,6 +16,11 @@ export const Layout: FC<Props> = React.memo(({ children }: Props) => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     getItems().then((data) => dispatch(itemsActions.updateItems(data)))
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser?.uid) {
+        getUserFromDatabase(currentUser.uid)(dispatch)
+      }
+    })
   }, [])
 
   return (

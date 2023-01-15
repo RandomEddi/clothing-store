@@ -8,13 +8,13 @@ const index: FC = () => {
 
   useEffect(() => {
     if (!router) return
-
+    
     if (!profile.isLogged) {
       router.push('/login')
     }
-  }, [router])
+  }, [router, profile])
 
-  return <div></div>
+  return <div>{profile.userData.email}</div>
 }
 
 export default index

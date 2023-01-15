@@ -3,8 +3,8 @@ import Link from 'next/link'
 import React, { FC, FormEvent, useReducer, useState } from 'react'
 import { LoginPageStyles as styles } from 'styles/pages'
 import { signIn } from '.firebase/login'
-import { createUserInDataBase } from '.firebase/user'
-import { v4 as uuid } from 'uuid'
+import { createUserInDatabase } from '.firebase/user'
+import Cookies from 'js-cookie'
 
 interface IRegistrationState {
   firstName: string
@@ -70,7 +70,6 @@ export const Registration: FC = () => {
   const [registrationError, setRegistrationError] = useState<string | null>(
     null
   )
-  //TODO: Сделать обработку ошибок
 
   const onRegistrationSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -83,31 +82,40 @@ export const Registration: FC = () => {
       registrationState.repeatPass &&
       registrationState.policy
     ) {
-      try {
-        setRegistrationError(null)
-        const res = await signIn(
-          registrationState.email,
-          registrationState.pass
-        )
-        if (typeof res === 'string') {
-          throw new Error(res)
+      setRegistrationError(null)
+      const res = await signIn(registrationState.email, registrationState.pass)
+
+      if (typeof res === 'string') {
+        if (res.includes('auth/email-already-in-use')) {
+          setRegistrationError('Почта уже зарегистрирована.')
+        } else {
+          setRegistrationError('Ошибка.')
         }
-        const unique_id = uuid()
-        createUserInDataBase({
-          id: unique_id,
-          email: registrationState.email,
-          firstName: registrationState.firstName,
-          lastName: registrationState.lastName,
-          phone: registrationState.phone
-        })
-      } catch (e) {
-        if (e instanceof Error) {
-          setRegistrationError(e.message)
-          console.log('Error:', e.message)
-        }
-        console.log('asd')
+        return
       }
+
+      setRegistrationError(null)
+
+      createUserInDatabase({
+        id: res.user.uid,
+        email: registrationState.email,
+        firstName: registrationState.firstName,
+        lastName: registrationState.lastName,
+        phone: registrationState.phone
+      })
+
+      Cookies.set('refreshToken', res.user.refreshToken, {
+        //@ts-ignore
+        expires: new Date(Date.now() + res._tokenResponse.expiresIn)
+      })
+
+      //@ts-ignore
+      Cookies.set('accessToken', res.user.accessToken, {
+        //@ts-ignore
+        expires: new Date(Date.now() + res._tokenResponse.expiresIn)
+      })
     } else {
+      setRegistrationError('Заполните поля')
       console.log('Заполните поля')
     }
   }
@@ -152,7 +160,7 @@ export const Registration: FC = () => {
           value={registrationState.phone}
           required
           placeholder='Телефон'
-          type='text'
+          type='tel'
           id='phone'
           pattern='^[0-9]{10,12}$'
           title='ПРИМЕР: 8987654321'
@@ -169,7 +177,7 @@ export const Registration: FC = () => {
           placeholder='Электронная почта'
           pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
           title='ПРИМЕР: test@gmail.com'
-          type='tel'
+          type='email'
           id='email'
         ></Input>
         <Input
@@ -220,7 +228,7 @@ export const Registration: FC = () => {
           </CheckBox>
         </div>
         {registrationError && (
-          <p className={styles.error}>Неправильно заполнена форма</p>
+          <p className={styles.error}>{registrationError}</p>
         )}
         <Button type={buttonType.gray}>зарегистрироваться</Button>
       </form>

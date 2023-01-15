@@ -28,6 +28,6 @@ interface IUserAddresses {
 export interface IProfile {
   isLogged?: boolean
   userData: Partial<IUserData>
-  userAddresses: IUserAddresses[]
-  userOrders: IUserOrder[]
+  userAddresses?: IUserAddresses[]
+  userOrders?: IUserOrder[]
 }
