@@ -10,15 +10,22 @@ const index: FC = () => {
 
   useEffect(() => {
     if (!router) return
-    
+
     if (!profile.isLogged) {
       router.push('/login')
     }
   }, [router, profile])
+  
+  const onLogOut = () => {
+    logOut()
+  }
 
-  return <div>
-    <Button clickHandler={logOut}>Выйти</Button>
-    {profile.userData.email}</div>
+  return (
+    <div>
+      <Button clickHandler={onLogOut}>Выйти</Button>
+      {profile.userData.email}
+    </div>
+  )
 }
 
 export default index

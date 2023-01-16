@@ -6,12 +6,18 @@
   margin-bottom: 80px;
   .registration {
     margin-right: 248px;
+    .error {
+      margin: 10px 0 23px 0;
+    }
   }
   .login {
     .recovery {
       margin-top: 10px;
       font-size: var(--fontSizeMedium);
       color: $gray;
+    }
+    .error {
+      margin: 0 0 23px 0;
     }
   }
   .registration,
@@ -45,7 +51,6 @@
       }
     }
     .error {
-      margin: 23px 0;
       color: red;
       font-size: var(--fontSizeMedium);
       max-width: 300px;
