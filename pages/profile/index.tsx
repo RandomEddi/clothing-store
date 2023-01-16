@@ -1,6 +1,8 @@
 import React, { FC, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useAppSelector } from 'hooks/useAppSelector'
+import { Button } from 'components/ui'
+import { logOut } from '.firebase/login'
 
 const index: FC = () => {
   const profile = useAppSelector((state) => state.profileReducer)
@@ -14,7 +16,9 @@ const index: FC = () => {
     }
   }, [router, profile])
 
-  return <div>{profile.userData.email}</div>
+  return <div>
+    <Button clickHandler={logOut}>Выйти</Button>
+    {profile.userData.email}</div>
 }
 
 export default index

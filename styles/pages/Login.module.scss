@@ -7,6 +7,13 @@
   .registration {
     margin-right: 248px;
   }
+  .login {
+    .recovery {
+      margin-top: 10px;
+      font-size: var(--fontSizeMedium);
+      color: $gray;
+    }
+  }
   .registration,
   .login {
     .header {
@@ -17,6 +24,11 @@
       font-size: var(--fontSizeBig);
     }
     form {
+      display: flex;
+      flex-direction: column;
+      & > button {
+        align-self: flex-start;
+      }
       & > div {
         margin-bottom: 30px;
       }

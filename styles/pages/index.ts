@@ -21,3 +21,6 @@ export { CatalogPageItemStyles }
 
 import LoginPageStyles from './Login.module.scss'
 export { LoginPageStyles }
+
+import RecoveryPageStyles from './RecoveryPage.module.scss'
+export { RecoveryPageStyles }

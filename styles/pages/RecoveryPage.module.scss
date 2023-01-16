@@ -1,0 +1,15 @@
+@import '../variables.scss';
+
+.recovery {
+  margin-top: 80px;
+  & > p {
+    margin-bottom: 30px;
+    color: $mainColor;
+    font-size: var(--fontSizeBig);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  form button {
+    margin-top: 50px;
+  }
+}

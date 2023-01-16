@@ -6,6 +6,7 @@ import { logIn } from '.firebase/login'
 import Cookies from 'js-cookie'
 import { useAppSelector } from 'hooks/useAppSelector'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export const Login: FC = () => {
   const [loginEmail, setLoginEmail] = useState<string>('')
@@ -20,7 +21,6 @@ export const Login: FC = () => {
       router.push('/profile')
     }
   }, [isLogged])
-
 
   const onLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -87,6 +87,9 @@ export const Login: FC = () => {
         </Input>
         {loginError && <p className={styles.error}>{loginError}</p>}
         <Button>Войти</Button>
+        <Link href={'/login/recovery'} className={styles.recovery}>
+          Забыли пароль
+        </Link>
       </form>
     </div>
   )
