@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { IItem, ItemColorObject, ItemColorType } from 'types'
 import { CatalogPageItemStyles as styles } from 'styles/pages'
-import { Button, buttonType, CarouselApp } from 'components/ui'
+import { Button, CarouselApp } from 'components/ui'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'hooks'
@@ -106,7 +106,7 @@ export const CatalogPageItem: FC<IItem> = (props) => {
         </div>
         <div className={styles.catalogItemManagement}>
           <Button
-            type={isItemInCart ? buttonType.cartActive : buttonType.blue}
+            type={isItemInCart ? 'cartActive' : 'blue'}
             clickHandler={onAddToCart}
             style={!selectedSize ? { cursor: 'no-drop' } : {}}
           >

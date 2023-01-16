@@ -1,4 +1,4 @@
-import { Input, CheckBox, Button, buttonType } from 'components/ui'
+import { Input, CheckBox, Button } from 'components/ui'
 import Link from 'next/link'
 import React, { FC, FormEvent, useReducer, useState } from 'react'
 import { LoginPageStyles as styles } from 'styles/pages'
@@ -230,7 +230,7 @@ export const Registration: FC = () => {
         {registrationError && (
           <p className={styles.error}>{registrationError}</p>
         )}
-        <Button type={buttonType.gray}>зарегистрироваться</Button>
+        <Button type='gray'>зарегистрироваться</Button>
       </form>
     </div>
   )

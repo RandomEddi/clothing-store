@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import {
   Button,
-  buttonType,
   CatalogItem,
   Loading,
   PagePath,
@@ -307,7 +306,7 @@ export default function catalog() {
                   />
                 </div>
               </div>
-              <Button clickHandler={onClearFilter} type={buttonType.gray}>
+              <Button clickHandler={onClearFilter} type='gray'>
                 Очистить фильтр
               </Button>
             </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { CatalogItem } from 'components'
-import { Button, buttonType } from 'components/ui'
+import { Button } from 'components/ui'
 import { useAppSelector, useWindowSize } from 'hooks'
 import { MainPageStyles as styles } from 'styles/pages'
 
@@ -59,7 +59,7 @@ export default function Home() {
         {!isCatalogFull && (
           <div className={styles.catalogBtn}>
             <Button
-              type={buttonType.gray}
+              type='gray'
               clickHandler={() => {
                 setIsCatalogFull(true)
               }}

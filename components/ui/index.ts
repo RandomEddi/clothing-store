@@ -1,4 +1,4 @@
-export { Button, buttonType } from './Button'
+export { Button } from './Button'
 export { CartItem } from './CartItem'
 export { CatalogItem } from './CatalogItem'
 export { FooterList } from './FooterList'

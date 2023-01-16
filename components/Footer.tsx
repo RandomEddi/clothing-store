@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Button, buttonType, FooterList } from 'components/ui'
+import { Button, FooterList } from 'components/ui'
 import { FooterStyles as styles } from 'styles'
 import { ILink } from 'types'
 
@@ -61,7 +61,7 @@ export const Footer: FC = () => {
           </p>
           <form className={styles.mailingForm}>
             <input placeholder='Введите ваш E-mail' type='email' required />
-            <Button type={buttonType.gray}>подписаться</Button>
+            <Button type='gray'>подписаться</Button>
             <div className={styles.underLine}></div>
           </form>
         </div>
