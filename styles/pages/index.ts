@@ -24,3 +24,6 @@ export { LoginPageStyles }
 
 import RecoveryPageStyles from './RecoveryPage.module.scss'
 export { RecoveryPageStyles }
+
+import ContactsPageStyles from './ContactsPage.module.scss'
+export { ContactsPageStyles }

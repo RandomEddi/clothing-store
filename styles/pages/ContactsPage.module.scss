@@ -1,0 +1,24 @@
+@import '../variables.scss';
+
+.contacts {
+  margin-top: 80px;
+  text-align: center;
+  color: $mainColor;
+  .header {
+    font-size: var(--fontSizeLg);
+    text-transform: uppercase;
+    margin-bottom: 80px;
+  }
+
+  span {
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: var(--fontSizeBig);
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: var(--fontSizeBig);
+    margin-bottom: 80px;
+  }
+}
